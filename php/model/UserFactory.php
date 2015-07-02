@@ -46,6 +46,9 @@ class UserFactory {
             $mysqli->close();
             return null;
         }
+        else {
+            echo "OK";
+        }
 
         // cerco prima nella tabella studenti
         $query = "select studenti.id studenti_id,

@@ -59,10 +59,12 @@ class FrontController {
                     break;
 
                 default:
+                    echo 'poba';
                     self::write404();
                     break;
             }
         } else {
+            echo 'poba';
             self::write404();
         }
     }
