@@ -3,7 +3,7 @@
 include_once 'Appello.php';
 include_once 'UserFactory.php';
 include_once 'InsegnamentoFactory.php';
-include_once 'Cliente.php';
+include_once 'Studente.php';
 include_once 'Docente.php';
 include_once 'User.php';
 

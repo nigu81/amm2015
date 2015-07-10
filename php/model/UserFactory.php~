@@ -287,7 +287,7 @@ class UserFactory {
      * @return Cliente un oggetto Cliente nel caso sia stato trovato,
      * NULL altrimenti
      */
-    public function cercaUtentePerId($id, $role) {
+    public function cercaClientePerId($id, $role) {
         $intval = filter_var($id, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
         if (!isset($intval)) {
             return null;

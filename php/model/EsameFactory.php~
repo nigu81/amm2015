@@ -1,7 +1,7 @@
 <?php
 
 include_once 'Esame.php';
-include_once 'Cliente.php';
+include_once 'Studente.php';
 include_once 'Docente.php';
 include_once 'Insegnamento.php';
 include_once 'UserFactory.php';

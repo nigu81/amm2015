@@ -54,7 +54,7 @@ if (!$vd->isJson()) {
                     <!--  header -->
                     <div id="header">
                         <div id="logo">
-                            <h1>PizzAMM</h1>
+                            <h1>EsAMMi</h1>
                         </div>
 
                         <!-- select per la versione del menu mobile -->
@@ -146,7 +146,7 @@ if (!$vd->isJson()) {
                 <footer>
                     <div id="footer">
                         <p>
-                            Sistema di ordinazione online pizza a domicilio
+                            Applicazione d'esempio per l'esame di Amministrazione di Sistema
                         </p>
 
 
