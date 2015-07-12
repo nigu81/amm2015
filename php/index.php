@@ -2,19 +2,9 @@
 
 
 include_once 'controller/BaseController.php';
-<<<<<<< HEAD
-<<<<<<< HEAD
 include_once 'controller/StudenteController.php';
 include_once 'controller/DocenteController.php';
 include_once 'controller/ClienteController.php';
-=======
-include_once 'controller/ClienteController.php';
-include_once 'controller/GestoreController.php';
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-=======
-include_once 'controller/ClienteController.php';
-include_once 'controller/GestoreController.php';
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 
 date_default_timezone_set("Europe/Rome");
 // punto unico di accesso all'applicazione
@@ -43,8 +33,6 @@ class FrontController {
                     $controller->handleInput($request);
                     break;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
                 // studente
                 case 'studente':
                     // la pagina degli studenti e' accessibile solo agli studenti
@@ -62,17 +50,6 @@ class FrontController {
                 case 'cliente':
                     // la pagina dei clienti e' accessibile solo ai clienti
                     // ai clienti ed agli amminstratori
-=======
-=======
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-                // cliente
-                case 'cliente':
-                    // la pagina dei clienti e' accessibile solo
-                    // ai studenti ed agli amminstratori
-<<<<<<< HEAD
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-=======
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
                     // il controllo viene fatto dal controller apposito
                     $controller = new ClienteController();
                     if (isset($_SESSION[BaseController::role]) &&
@@ -84,18 +61,9 @@ class FrontController {
 
                 // docente
                 case 'docente':
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                     // la pagina dei docenti e' accessibile solo
                     // ai docenti ed agli amminstratori
-=======
-                    // la pagina dei gestori e' accessibile solo
-                    // ai gestori ed agli amminstratori
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-=======
-                    // la pagina dei gestori e' accessibile solo
-                    // ai gestori ed agli amminstratori
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
                     // il controllo viene fatto dal controller apposito
                     $controller = new DocenteController();
                     if (isset($_SESSION[BaseController::role]) &&

@@ -1,8 +1,6 @@
 <?php
 
 include_once 'BaseController.php';
-<<<<<<< HEAD
-<<<<<<< HEAD
 //include_once basename(__DIR__) . '/../model/EsameFactory.php'; ORDINE
 //include_once basename(__DIR__) . '/../model/AppelloFactory.php';
 include_once basename(__DIR__) . '/../model/OrdineFactory.php';
@@ -10,36 +8,15 @@ include_once basename(__DIR__) . '/../model/OrdineFactory.php';
 /**
  * Controller che gestisce la modifica dei dati dell'applicazione relativa ai 
  * Clienti da parte di clienti con ruolo Cliente o Amministratore 
-=======
-=======
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-include_once basename(__DIR__) . '/../model/EsameFactory.php';
-include_once basename(__DIR__) . '/../model/AppelloFactory.php';
-
-/**
- * Controller che gestisce la modifica dei dati dell'applicazione relativa agli 
- * Studenti da parte di utenti con ruolo Studente o Amministratore 
-<<<<<<< HEAD
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-=======
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
  *
  * @author Davide Spano
  */
 class ClienteController extends BaseController {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     //const appelli = 'appelli';
     const lista_ordini = 'lista_ordini';
-=======
-    const appelli = 'appelli';
 
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-=======
-    const appelli = 'appelli';
-
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
     /**
      * Costruttore
      */
@@ -92,8 +69,6 @@ class ClienteController extends BaseController {
                         $vd->setSottoPagina('anagrafica');
                         break;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
                     // effettua un ordine
                     case 'ordina':
                         /*// carichiamo gli appelli dal db
@@ -107,25 +82,6 @@ class ClienteController extends BaseController {
                         $vd->setSottoPagina('lista_ordini');
                         break;
                         
-=======
-=======
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-                    // visualizzazione degli esami sostenuti
-                    case 'esami':
-                        $esami = EsameFactory::instance()->esamiPerStudente($user);
-                        $vd->setSottoPagina('esami');
-                        break;
-
-                    // iscrizione ad un appello
-                    case 'iscrizione':
-                        // carichiamo gli appelli dal db
-                        $appelli = AppelloFactory::instance()->getAppelliPerStudente($user);
-                        $vd->setSottoPagina('iscrizione');
-                        break;
-<<<<<<< HEAD
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-=======
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
                     default:
 
                         $vd->setSottoPagina('home');
@@ -176,23 +132,11 @@ class ClienteController extends BaseController {
                         $this->showHomeStudente($vd);
                         break;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
                     // fai un nuovo ordine
                     case 'ordina':
                         // recuperiamo l'indice 
                         /*$msg = array();
-=======
-=======
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-                    // iscrizione ad un appello
-                    case 'iscrivi':
-                        // recuperiamo l'indice 
-                        $msg = array();
-<<<<<<< HEAD
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-=======
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+
                         $a = $this->getAppelloPerIndice($appelli, $request, $msg);
                         if (isset($a)) {
                             $isOk = $a->iscrivi($user);
@@ -205,39 +149,11 @@ class ClienteController extends BaseController {
                         }
 
                         $this->creaFeedbackUtente($msg, $vd, "Ti sei iscritto all'appello specificato");
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                         $this->showHomeStudente($vd);*/
                         break;
 
-=======
-=======
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-                        $this->showHomeStudente($vd);
-                        break;
 
-                    // cancellazione da un appello
-                    case 'cancella':
-                        // recuperiamo l'indice 
-                        $msg = array();
-                        $a = $this->getAppelloPerIndice($appelli, $request, $msg);
-
-                        if (isset($a)) {
-                            $isOk = $a->cancella($user);
-                            $count = AppelloFactory::instance()->cancellaIscrizione($user, $a);
-                            if (!$isOk || $count != 1) {
-                                $msg[] = "<li> Impossibile cancellarti dall'appello specificato </li>";
-                            }
-                        } else {
-                            $msg[] = "<li> Impossibile cancellarti dall'appello specificato </li>";
-                        }
-                        $this->creaFeedbackUtente($msg, $vd, "Ti sei cancellato dall'appello specificato");
-                        $this->showHomeUtente($vd);
-                        break;
-<<<<<<< HEAD
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-=======
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
                     default : $this->showLoginPage($vd);
                 }
             } else {
@@ -252,31 +168,7 @@ class ClienteController extends BaseController {
         require basename(__DIR__) . '/../view/master.php';
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-    private function getAppelloPerIndice(&$appelli, &$request, &$msg) {
-        if (isset($request['appello'])) {
-            // indice per l'appello definito, verifichiamo che sia un intero
-            $intVal = filter_var($request['appello'], FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
-            if (isset($intVal) && $intVal > -1 && $intVal < count($appelli)) {
-                return $appelli[$intVal];
-            } else {
-                $msg[] = "<li> L'appello specificato non esiste </li>";
-                return null;
-            }
-        } else {
-            $msg[] = '<li>Appello non specificato<li>';
-            return null;
-        }
-    }
 
-<<<<<<< HEAD
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-=======
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 }
 
 ?>

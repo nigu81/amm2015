@@ -54,15 +54,9 @@ if (!$vd->isJson()) {
                     <!--  header -->
                     <div id="header">
                         <div id="logo">
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                             <h1>EsAMMi</h1>
-=======
-                            <h1>PizzAMM</h1>
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-=======
-                            <h1>PizzAMM</h1>
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+
                         </div>
 
                         <!-- select per la versione del menu mobile -->
@@ -154,15 +148,9 @@ if (!$vd->isJson()) {
                 <footer>
                     <div id="footer">
                         <p>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                             Applicazione d'esempio per l'esame di Amministrazione di Sistema
-=======
-                            Sistema di ordinazione online pizza a domicilio
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-=======
-                            Sistema di ordinazione online pizza a domicilio
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+
                         </p>
 
 

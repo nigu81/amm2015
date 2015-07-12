@@ -3,15 +3,7 @@
 include_once 'Appello.php';
 include_once 'UserFactory.php';
 include_once 'InsegnamentoFactory.php';
-<<<<<<< HEAD
-<<<<<<< HEAD
 include_once 'Studente.php';
-=======
-include_once 'Cliente.php';
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
-=======
-include_once 'Cliente.php';
->>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 include_once 'Docente.php';
 include_once 'User.php';
 
