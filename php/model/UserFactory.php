@@ -3,7 +3,10 @@
 include_once 'User.php';
 include_once 'Docente.php';
 <<<<<<< HEAD
+<<<<<<< HEAD
 include_once 'Studente.php';
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 include_once 'Cliente.php';
@@ -40,7 +43,11 @@ class UserFactory {
      * @param string $username
      * @param string $password
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @return \User|\Docente|\Studente|\Cliente
+=======
+     * @return \User|\Docente|\Cliente
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
      * @return \User|\Docente|\Cliente
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -56,17 +63,23 @@ class UserFactory {
         }
         
 <<<<<<< HEAD
+<<<<<<< HEAD
         // prima cerco nella tabella clienti
         $query = "select clienti.id clienti_id,
             clienti.nome clienti_nome,
             clienti.cognome clienti_cognome,
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 
         // cerco prima nella tabella clienti
         $query = "select clienti.id clienti_id,
             clienti.nome clienti_nome,
             clienti.cognome clienti_cognome,
             clienti.matricola clienti_matricola,
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
             clienti.email clienti_email,
             clienti.citta clienti_citta,
@@ -75,6 +88,7 @@ class UserFactory {
             clienti.provincia clienti_provincia,
             clienti.numero_civico clienti_numero_civico,
             clienti.username clienti_username,
+<<<<<<< HEAD
 <<<<<<< HEAD
             clienti.password clienti_password
             
@@ -120,6 +134,9 @@ class UserFactory {
 =======
             clienti.password clienti_password,
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
+            clienti.password clienti_password,
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
             
             CdL.id CdL_id,
             CdL.nome CdL_nome,
@@ -129,15 +146,21 @@ class UserFactory {
             dipartimenti.nome dipartimenti_nome
             
 <<<<<<< HEAD
+<<<<<<< HEAD
             from studenti 
             join CdL on studenti.cdl_id = CdL.id
             join dipartimenti on CdL.dipartimento_id = dipartimenti.id
             where studenti.username = ? and studenti.password = ?";
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
             from clienti 
             join CdL on clienti.cdl_id = CdL.id
             join dipartimenti on CdL.dipartimento_id = dipartimenti.id
             where clienti.username = ? and clienti.password = ?";
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
         $stmt = $mysqli->stmt_init();
         $stmt->prepare($query);
@@ -156,17 +179,23 @@ class UserFactory {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         $studente = self::caricaStudenteDaStmt($stmt);
         if (isset($studente)) {
             // ho trovato uno studente
             $mysqli->close();
             return $studente;
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
         $cliente = self::caricaClienteDaStmt($stmt);
         if (isset($cliente)) {
             // ho trovato un cliente
             $mysqli->close();
             return $cliente;
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
         }
 
@@ -215,8 +244,11 @@ class UserFactory {
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 
@@ -267,6 +299,7 @@ class UserFactory {
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
      * Restituisce la lista degli studenti presenti nel sistema
      * @return array
      */
@@ -298,23 +331,31 @@ class UserFactory {
     /**
 =======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
      * Restituisce la lista dei clienti presenti nel sistema
      * @return array
      */
     public function &getListaClienti() {
         $clienti = array();
 <<<<<<< HEAD
+<<<<<<< HEAD
         $query = "select * from clienti ";
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
             error_log("[getListaClienti] impossibile inizializzare il database");
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
         $query = "select * from clienti " .
                 "join CdL on cdl_id = CdL.id" .
                 "join dipartimenti on CdL.dipartimento_id = dipartimenti.id";
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
             error_log("[getListaclienti] impossibile inizializzare il database");
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
             $mysqli->close();
             return $clienti;
@@ -322,7 +363,11 @@ class UserFactory {
         $result = $mysqli->query($query);
         if ($mysqli->errno > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             error_log("[getListaClienti] impossibile eseguire la query");
+=======
+            error_log("[getListaclienti] impossibile eseguire la query");
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
             error_log("[getListaclienti] impossibile eseguire la query");
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -339,6 +384,7 @@ class UserFactory {
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
      * Carica uno studente dalla matricola
      * @param int $matricola la matricola da cercare
      * @return Studente un oggetto Studente nel caso sia stato trovato,
@@ -346,12 +392,17 @@ class UserFactory {
      */
     public function cercaStudentePerMatricola($matricola) {
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
      * Carica un clienti dalla matricola
      * @param int $matricola la matricola da cercare
      * @return Cliente un oggetto Cliente nel caso sia stato trovato,
      * NULL altrimenti
      */
     public function cercaClientePerMatricola($matricola) {
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 
 
@@ -363,7 +414,11 @@ class UserFactory {
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             error_log("[cercaStudentePerMatricola] impossibile inizializzare il database");
+=======
+            error_log("[cercaClientePerMatricola] impossibile inizializzare il database");
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
             error_log("[cercaClientePerMatricola] impossibile inizializzare il database");
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -371,6 +426,7 @@ class UserFactory {
             return null;
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         $query = "select studenti.id studenti_id,
             studenti.nome studenti_nome,
@@ -385,6 +441,8 @@ class UserFactory {
             studenti.username studenti_username,
             studenti.password studenti_password,
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
         $query = "select clienti.id clienti_id,
             clienti.nome clienti_nome,
             clienti.cognome clienti_cognome,
@@ -397,6 +455,9 @@ class UserFactory {
             clienti.numero_civico clienti_numero_civico,
             clienti.username clienti_username,
             clienti.password clienti_password,
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
             
             CdL.id CdL_id,
@@ -407,6 +468,7 @@ class UserFactory {
             dipartimenti.nome dipartimenti_nome
             
 <<<<<<< HEAD
+<<<<<<< HEAD
             from studenti 
             join CdL on studenti.cdl_id = CdL.id
             join dipartimenti on CdL.dipartimento_id = dipartimenti.id
@@ -416,6 +478,8 @@ class UserFactory {
         if (!$stmt) {
             error_log("[cercaStudentePerMatricola] impossibile" .
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
             from clienti 
             join CdL on clienti.cdl_id = CdL.id
             join dipartimenti on CdL.dipartimento_id = dipartimenti.id
@@ -424,6 +488,9 @@ class UserFactory {
         $stmt->prepare($query);
         if (!$stmt) {
             error_log("[cercaClientePerMatricola] impossibile" .
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
                     " inizializzare il prepared statement");
             $mysqli->close();
@@ -432,7 +499,11 @@ class UserFactory {
 
         if (!$stmt->bind_param('i', $intval)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             error_log("[cercaStudentePerMatricola] impossibile" .
+=======
+            error_log("[cercaClientePerMatricola] impossibile" .
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
             error_log("[cercaClientePerMatricola] impossibile" .
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -442,7 +513,11 @@ class UserFactory {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         $toRet =  self::caricaStudenteDaStmt($stmt);
+=======
+        $toRet =  self::caricaClienteDaStmt($stmt);
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
         $toRet =  self::caricaClienteDaStmt($stmt);
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -452,9 +527,15 @@ class UserFactory {
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
      * Cerca uno studente per id
      * @param int $id
      * @return Studente un oggetto Studente nel caso sia stato trovato,
+=======
+     * Cerca un cliente per id
+     * @param int $id
+     * @return Cliente un oggetto Cliente nel caso sia stato trovato,
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
      * Cerca un cliente per id
      * @param int $id
@@ -470,7 +551,11 @@ class UserFactory {
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             error_log("[cercaUtentePerId] impossibile inizializzare il database");
+=======
+            error_log("[cercaClientePerId] impossibile inizializzare il database");
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
             error_log("[cercaClientePerId] impossibile inizializzare il database");
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -479,6 +564,7 @@ class UserFactory {
         }
 
         switch ($role) {
+<<<<<<< HEAD
 <<<<<<< HEAD
             case User::Studente:
                 $query = "select 
@@ -527,12 +613,18 @@ class UserFactory {
                 
 =======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
             case User::Cliente:
                 $query = "select 
             clienti.id clienti_id,
             clienti.nome clienti_nome,
             clienti.cognome clienti_cognome,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            clienti.matricola clienti_matricola,
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
             clienti.matricola clienti_matricola,
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -544,11 +636,14 @@ class UserFactory {
             clienti.numero_civico clienti_numero_civico,
             clienti.username clienti_username,
 <<<<<<< HEAD
+<<<<<<< HEAD
             clienti.password clienti_password
             
             from clienti 
           
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
             clienti.password clienti_password,
             
             CdL.id CdL_id,
@@ -561,6 +656,9 @@ class UserFactory {
             from clienti 
             join CdL on clienti.cdl_id = CdL.id
             join dipartimenti on CdL.dipartimento_id = dipartimenti.id
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
             where clienti.id = ?";
                 $stmt = $mysqli->stmt_init();
@@ -581,8 +679,12 @@ class UserFactory {
 
                 return self::caricaClienteDaStmt($stmt);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 break;    
             
+=======
+                break;
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
                 break;
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -635,6 +737,7 @@ class UserFactory {
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
      * Crea uno studente da una riga del db
      * @param type $row
      * @return \Studente
@@ -665,6 +768,9 @@ class UserFactory {
 =======
      * Crea uno cliente da una riga del db
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
+     * Crea uno cliente da una riga del db
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
      * @param type $row
      * @return \Cliente
      */
@@ -677,6 +783,10 @@ class UserFactory {
         $cliente->setCap($row['clienti_cap']);
         $cliente->setVia($row['clienti_via']);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        $cliente->setMatricola($row['clienti_matricola']);
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
         $cliente->setMatricola($row['clienti_matricola']);
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -688,16 +798,22 @@ class UserFactory {
         $cliente->setPassword($row['clienti_password']);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         return $cliente;
     }
 
 
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
         if (isset($row['CdL_id']))
             $cliente->setCorsoDiLaurea(CorsoDiLaureaFactory::instance()->creaDaArray($row));
         return $cliente;
     }
 
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
     /**
      * Crea un docente da una riga del db
@@ -741,8 +857,13 @@ class UserFactory {
         $count = 0;
         switch ($user->getRuolo()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             case User::Studente:
                 $count = $this->salvaStudente($user, $stmt);
+=======
+            case User::Cliente:
+                $count = $this->salvaCliente($user, $stmt);
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
             case User::Cliente:
                 $count = $this->salvaCliente($user, $stmt);
@@ -759,6 +880,7 @@ class UserFactory {
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
      * Rende persistenti le modifiche all'anagrafica di uno studente sul db
      * @param Studente $s lo studente considerato
      * @param mysqli_stmt $stmt un prepared statement
@@ -767,6 +889,8 @@ class UserFactory {
     private function salvaStudente(Studente $s, mysqli_stmt $stmt) {
         $query = " update studenti set 
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
      * Rende persistenti le modifiche all'anagrafica di uno cliente sul db
      * @param cliente $s lo cliente considerato
      * @param mysqli_stmt $stmt un prepared statement
@@ -774,6 +898,9 @@ class UserFactory {
      */
     private function salvaCliente(Cliente $s, mysqli_stmt $stmt) {
         $query = " update clienti set 
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
                     password = ?,
                     nome = ?,
@@ -786,17 +913,23 @@ class UserFactory {
                     cap = ?,
                     via = ?
 <<<<<<< HEAD
+<<<<<<< HEAD
                     where studenti.id = ?
                     ";
         $stmt->prepare($query);
         if (!$stmt) {
             error_log("[salvaStudente] impossibile" .
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
                     where clienti.id = ?
                     ";
         $stmt->prepare($query);
         if (!$stmt) {
             error_log("[salvaCliente] impossibile" .
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
                     " inizializzare il prepared statement");
             return 0;
@@ -804,7 +937,11 @@ class UserFactory {
 
         if (!$stmt->bind_param('ssssississi', $s->getPassword(), $s->getNome(), $s->getCognome(), $s->getEmail(), $s->getNumeroCivico(), $s->getCitta(), $s->getProvincia(), $s->getMatricola(), $s->getCap(), $s->getVia(), $s->getId())) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             error_log("[salvaStudente] impossibile" .
+=======
+            error_log("[salvaCliente] impossibile" .
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
             error_log("[salvaCliente] impossibile" .
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -845,7 +982,11 @@ class UserFactory {
         $stmt->prepare($query);
         if (!$stmt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             error_log("[salvaStudente] impossibile" .
+=======
+            error_log("[salvaCliente] impossibile" .
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
             error_log("[salvaCliente] impossibile" .
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -867,7 +1008,11 @@ class UserFactory {
                 $d->getDipartimento()->getId(),
                 $d->getId())) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             error_log("[salvaStudente] impossibile" .
+=======
+            error_log("[salvaCliente] impossibile" .
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
             error_log("[salvaCliente] impossibile" .
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -930,6 +1075,7 @@ class UserFactory {
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
      * Carica uno studente eseguendo un prepared statement
      * @param mysqli_stmt $stmt
      * @return null
@@ -965,6 +1111,9 @@ class UserFactory {
 =======
      * Carica uno Cliente eseguendo un prepared statement
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
+     * Carica uno Cliente eseguendo un prepared statement
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
      * @param mysqli_stmt $stmt
      * @return null
      */
@@ -979,9 +1128,13 @@ class UserFactory {
         $row = array();
         $bind = $stmt->bind_result(
 <<<<<<< HEAD
+<<<<<<< HEAD
                 $row['clienti_id'], $row['clienti_nome'], $row['clienti_cognome'], $row['clienti_email'], $row['clienti_citta'], 
                 $row['clienti_via'], $row['clienti_cap'], $row['clienti_provincia'], $row['clienti_numero_civico'], 
                 $row['clienti_username'], $row['clienti_password']);
+=======
+                $row['clienti_id'], $row['clienti_nome'], $row['clienti_cognome'], $row['clienti_matricola'], $row['clienti_email'], $row['clienti_citta'], $row['clienti_via'], $row['clienti_cap'], $row['clienti_provincia'], $row['clienti_numero_civico'], $row['clienti_username'], $row['clienti_password'], $row['CdL_id'], $row['CdL_nome'], $row['CdL_codice'], $row['dipartimenti_id'], $row['dipartimenti_nome']);
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
                 $row['clienti_id'], $row['clienti_nome'], $row['clienti_cognome'], $row['clienti_matricola'], $row['clienti_email'], $row['clienti_citta'], $row['clienti_via'], $row['clienti_cap'], $row['clienti_provincia'], $row['clienti_numero_civico'], $row['clienti_username'], $row['clienti_password'], $row['CdL_id'], $row['CdL_nome'], $row['CdL_codice'], $row['dipartimenti_id'], $row['dipartimenti_nome']);
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -1001,7 +1154,10 @@ class UserFactory {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 }

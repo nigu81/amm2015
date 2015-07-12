@@ -4,6 +4,11 @@
         <li><strong>Nome:</strong> <?= $user->getNome() ?></li>
         <li><strong>Cognome:</strong> <?= $user->getCognome() ?></li>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        <li><strong>Matricola:</strong> <?= $user->getMatricola() ?></li>
+        <li><strong>CDL:</strong> <?= $user->getCorsoDiLaurea()->getNome() ?></li>
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
         <li><strong>Matricola:</strong> <?= $user->getMatricola() ?></li>
         <li><strong>CDL:</strong> <?= $user->getCorsoDiLaurea()->getNome() ?></li>
@@ -15,7 +20,11 @@
     <h3>Indirizzo</h3>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <form method="post" action="cliente/anagrafica<?= $vd->scriviToken('?')?>">
+=======
+    <form method="post" action="studente/anagrafica<?= $vd->scriviToken('?')?>">
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
     <form method="post" action="studente/anagrafica<?= $vd->scriviToken('?')?>">
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -42,7 +51,11 @@
     <h3>Email</h3>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <form method="post" action="cliente/anagrafica<?= $vd->scriviToken('&')?>">
+=======
+    <form method="post" action="studente/anagrafica<?= $vd->scriviToken('&')?>">
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
     <form method="post" action="studente/anagrafica<?= $vd->scriviToken('&')?>">
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -57,7 +70,11 @@
 <div class="input-form">
     <h3>Password</h3>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <form method="post" action="cliente/anagrafica<?= $vd->scriviToken('&')?>">
+=======
+    <form method="post" action="studente/anagrafica<?= $vd->scriviToken('&')?>">
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
     <form method="post" action="studente/anagrafica<?= $vd->scriviToken('&')?>">
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1

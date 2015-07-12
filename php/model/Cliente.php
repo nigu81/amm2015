@@ -2,24 +2,33 @@
 
 include_once 'User.php';
 <<<<<<< HEAD
+<<<<<<< HEAD
 //include_once 'CorsoDiLaurea.php'; Ordine
 
 /**
  * Classe che rappresenta un Cliente
  * @author Davide Spano
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 include_once 'CorsoDiLaurea.php';
 
 /**
  * Classe che rappresenta un Cliente
  * @author Nicola Frongia
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
  */
 class Cliente extends User {
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
      * Matricola dello studente
      * @var int
      */
@@ -32,6 +41,9 @@ class Cliente extends User {
     private $cdl;
 
     /**
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
      * Costruttore della classe
      */
@@ -43,7 +55,10 @@ class Cliente extends User {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
     /**
      * Restituisce la matricola per lo studente
      * @return int
@@ -82,6 +97,9 @@ class Cliente extends User {
     public function setCorsoDiLaurea(CorsoDiLaurea $cdl) {
         $this->cdl = $cdl;
     }
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 
 }

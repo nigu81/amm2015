@@ -14,12 +14,16 @@ class User {
      * Costante che definisce il ruolo studente
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     const Studente = 2;
     
     /**
      * Costante che definisce il ruolo cliente
      */
     const Cliente = 3;
+=======
+    const Cliente = 2;
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
     const Cliente = 2;
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -214,7 +218,10 @@ class User {
         switch ($ruolo) {
             case self::Docente:
 <<<<<<< HEAD
+<<<<<<< HEAD
             case self::Studente:
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
             case self::Cliente:

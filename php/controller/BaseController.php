@@ -6,15 +6,21 @@ include_once basename(__DIR__) . '/../model/UserFactory.php';
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Controller che gestisce gli utenti non autenticati, 
  * fornendo le funzionalita' comuni anche agli altri controller
  *
  * @author Davide Spano
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
  * Controller che gestisce i clienti non autenticati, 
  * fornendo le funzionalita' comuni anche agli altri controller
  *
  * @author Nicola Frongia
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
  */
 class BaseController {
@@ -95,7 +101,11 @@ class BaseController {
     protected function showLoginPage($vd) {
         // mostro la pagina di login
 <<<<<<< HEAD
+<<<<<<< HEAD
         $vd->setTitolo("esAMMi - login");
+=======
+        $vd->setTitolo("pizzAMM - login");
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
         $vd->setTitolo("pizzAMM - login");
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
@@ -111,6 +121,7 @@ class BaseController {
      * dello studente
      * @param ViewDescriptor $vd il descrittore della vista
      */
+<<<<<<< HEAD
 <<<<<<< HEAD
     protected function showHomeStudente($vd) {
         // mostro la home degli studenti
@@ -133,10 +144,15 @@ class BaseController {
 
         $vd->setTitolo("esAMMi - gestione cliente ");
 =======
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
     protected function showHomeCliente($vd) {
         // mostro la home degli studenti
 
         $vd->setTitolo("pizzAMM - gestione cliente ");
+<<<<<<< HEAD
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
+=======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
         $vd->setMenuFile(basename(__DIR__) . '/../view/cliente/menu.php');
         $vd->setLogoFile(basename(__DIR__) . '/../view/cliente/logo.php');
@@ -184,8 +200,13 @@ class BaseController {
         $user = UserFactory::instance()->cercaUtentePerId($_SESSION[self::user], $_SESSION[self::role]);
         switch ($user->getRuolo()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             case User::Studente:
                 $this->showHomeStudente($vd);
+=======
+            case User::Cliente:
+                $this->showHomeCliente($vd);
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
             case User::Cliente:
                 $this->showHomeCliente($vd);
@@ -196,9 +217,12 @@ class BaseController {
                 $this->showHomeDocente($vd);
                 break;
 <<<<<<< HEAD
+<<<<<<< HEAD
             case User::Cliente:
                 $this->showHomeCliente($vd);
                 break;
+=======
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 
@@ -236,7 +260,11 @@ class BaseController {
             $_SESSION[self::user] = $user->getId();
             $_SESSION[self::role] = $user->getRuolo();
 <<<<<<< HEAD
+<<<<<<< HEAD
             $this->showHomeUtente($vd);
+=======
+            $this->showHomeCliente($vd);
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
             $this->showHomeCliente($vd);
 >>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1

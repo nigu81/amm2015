@@ -27,7 +27,12 @@ class Settings {
                 case 'localhost':
                     // configurazione locale
 <<<<<<< HEAD
+<<<<<<< HEAD
                     self::$appPath = 'http://' . $_SERVER['HTTP_HOST'] . '/progettoamm/';
+=======
+                    //self::$appPath = 'http://' . $_SERVER['HTTP_HOST'] . '/pizzAMM2015/';
+                    self::$appPath = 'http://' . $_SERVER['HTTP_HOST'] . '/pizzAMM2015/';
+>>>>>>> 7123b1f8b33e43679993cd0ecaac23f68f0771b1
 =======
                     //self::$appPath = 'http://' . $_SERVER['HTTP_HOST'] . '/pizzAMM2015/';
                     self::$appPath = 'http://' . $_SERVER['HTTP_HOST'] . '/pizzAMM2015/';
