@@ -213,6 +213,8 @@ class User {
             case self::Docente:
 
             case self::Studente:
+            
+            case self::Gestore:
 
             case self::Cliente:
                 $this->ruolo = $ruolo;

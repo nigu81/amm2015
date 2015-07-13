@@ -205,8 +205,8 @@ class InsegnamentoFactory {
             $mysqli->close();
             return null;
         }
-
-        if (!$stmt->bind_param('i', $docente->getId())) {
+        $value = $docente->getId();    
+        if (!$stmt->bind_param('i', $value)) {
             error_log("[getListaInsegnamentiPerDocente] impossibile" .
                     " effettuare il binding in input");
             $mysqli->close();
@@ -220,7 +220,7 @@ class InsegnamentoFactory {
      * Crea un insegnamento a partire da una riga del DB
      * @param type $row
      */
-    public function creaDaArray(&$row){
+    public static function creaDaArray(&$row){
         $insegnamento = new Insegnamento();
         $insegnamento->setId($row['insegnamenti_id']);
         $insegnamento->setCfu($row['insegnamenti_cfu']);

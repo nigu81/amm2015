@@ -3,15 +3,21 @@
     <ul class="none">
         <li><strong>Nome:</strong> <?= $user->getNome() ?></li>
         <li><strong>Cognome:</strong> <?= $user->getCognome() ?></li>
-
     </ul>
 </div>
 
 <div class="input-form">
-    <h3>Indirizzo</h3>
+    <h3>Pizzeria</h3>
 
-
-        <input type="hidden" name="cmd" value="indirizzo"/>
+    <form method="post" action="gestore/anagrafica<?= '?'.$vd->scriviToken()?>">
+        <input type="hidden" name="cmd" value="ufficio"/>
+        <label for="pizzeria">Pizzeria</label>
+        <select name="pizzeria" id="pizzeria">
+            <?php foreach ($pizzerie as $pizzeria) { ?>
+                <option value="<?= $pizzeria->getId() ?>" 
+                <?= $user->getPizzeria()->equals($pizzeria) ? 'selected' : '' ?>><?= $pizzeria->getNome() ?></option>
+            <?php } ?>
+        </select>
         <label for="via">Via o Piazza:</label>
         <input type="text" name="via" id="via" value="<?= $user->getVia() ?>"/>
         <br>
@@ -28,13 +34,14 @@
         <input type="text" name="cap" id="cap" value="<?= $user->getCap() ?>"/>
         <br/>
         <input type="submit" value="Salva"/>
+
     </form>
 </div>
 <div class="input-form">
-    <h3>Email</h3>
+    <h3>Contatti</h3>
 
-
-        <input type="hidden" name="cmd" value="email"/>
+    <form method="post" action="gestore/anagrafica<?=$vd->scriviToken('?')?>">
+        <input type="hidden" name="cmd" value="contatti"/>
         <label for="email">Email:</label>
         <input type="text" name="email" id="email"value="<?= $user->getEmail() ?>"/>
         <br/>
@@ -44,7 +51,7 @@
 
 <div class="input-form">
     <h3>Password</h3>
-
+    <form method="post" action="gestore/anagrafica<?= $vd->scriviToken('?')?>">
         <input type="hidden" name="cmd" value="password"/>
         <label for="pass1">Nuova Password:</label>
         <input type="password" name="pass1" id="pass1"/>

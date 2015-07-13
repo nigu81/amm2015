@@ -1,0 +1,64 @@
+///////     ELENCO ORDINI PER CLIENTE //////////
+
+SELECT 
+	ordini_clienti.ordine_id ordine,
+    ordini.data data,
+    ordini.status status,
+    pizzerie.nome
+    
+FROM   ordini_clienti
+
+JOIN clienti ON
+ordini_clienti.cliente_id = clienti.id
+
+JOIN pizzerie ON
+ordini_clienti.pizzeria_id = pizzerie.id
+
+JOIN ordini ON
+ordini_clienti.ordine_id = ordini.id
+
+WHERE pizzerie.id = 1
+
+GROUP BY ordini_clienti.ordine_id
+
+
+//////      ELENCO ORDINI PER GESTORE ////////
+
+SELECT 
+	ordini_clienti.ordine_id ordine,
+	ordini.data data,
+	ordini.status status,
+	clienti.nome cliente
+    
+
+FROM   ordini_clienti
+	
+JOIN clienti ON
+ordini_clienti.cliente_id = clienti.id
+
+JOIN pizzerie ON
+ordini_clienti.pizzeria_id = pizzerie.id
+
+JOIN ordini ON
+ordini_clienti.ordine_id = ordini.id
+
+WHERE pizzerie.id = 1
+
+GROUP BY ordini_clienti.ordine_id
+
+
+////// QUERY DETTAGLIO ORDINE (SIA PER CLIENTE CHE PER GESTORE) /////
+
+SELECT 
+	ordini_clienti.ordine_id ordine,
+	pizze.nome   
+
+FROM ordini_clienti
+	
+JOIN ordini ON
+ordini_clienti.ordine_id = ordini.id
+
+JOIN pizze ON
+ordini_clienti.pizza_id = pizze.id
+
+WHERE ordini.id = 1

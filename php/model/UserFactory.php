@@ -4,8 +4,10 @@ include_once 'User.php';
 include_once 'Docente.php';
 include_once 'Studente.php';
 include_once 'Cliente.php';
+include_once 'Gestore.php';
 include_once 'CorsoDiLaureaFactory.php';
 include_once 'DipartimentoFactory.php';
+include_once 'PizzeriaFactory.php';
 
 /**
  * Classe per la creazione degli utenti del sistema
@@ -37,7 +39,7 @@ class UserFactory {
      * @param string $username
      * @param string $password
 
-     * @return \User|\Docente|\Studente|\Cliente
+     * @return \User|\Docente|\Studente|\Cliente|\Gestore
 
      */
     public function caricaUtente($username, $password) {
@@ -184,6 +186,50 @@ class UserFactory {
             $mysqli->close();
             return $docente;
         }
+        
+      // ora cerco un gestore
+        $query = "select 
+               gestori.id gestori_id,
+               gestori.nome gestori_nome,
+               gestori.cognome gestori_cognome,
+               gestori.email gestori_email,
+               gestori.citta gestori_citta,
+               gestori.cap gestori_cap,
+               gestori.via gestori_via,
+               gestori.provincia gestori_provincia,
+               gestori.numero_civico gestori_numero_civico,
+               gestori.username gestori_username,
+               gestori.password gestori_password,
+               pizzerie.id pizzerie_id,
+               pizzerie.nome pizzerie_nome
+               
+               from gestori 
+               join pizzerie on gestori.pizzeria_id = pizzerie.id
+               where gestori.username = ? and gestori.password = ?";
+
+        $stmt = $mysqli->stmt_init();
+        $stmt->prepare($query);
+        if (!$stmt) {
+            error_log("[loadUser] impossibile" .
+                    " inizializzare il prepared statement");
+            $mysqli->close();
+            return null;
+        }
+
+        if (!$stmt->bind_param('ss', $username, $password)) {
+            error_log("[loadUser] impossibile" .
+                    " effettuare il binding in input");
+            $mysqli->close();
+            return null;
+        }
+
+        $gestore = self::caricaGestoreDaStmt($stmt);
+        if (isset($gestore)) {
+            // ho trovato un gestore
+            $mysqli->close();
+            return $gestore;
+        }       
+ 
     }
 
     
@@ -232,6 +278,52 @@ class UserFactory {
         $mysqli->close();
         return $docenti;
     }
+    
+    
+    /**
+     * Restituisce un array con i Gestori presenti nel sistema
+     * @return array
+     */
+    public function &getListaGestori() {
+        $gestori = array();
+        $query = "select 
+               gestori.id gestori_id,
+               gestori.nome gestori_nome,
+               gestori.cognome gestori_cognome,
+               gestori.email gestori_email,
+               gestori.citta gestori_citta,
+               gestori.cap gestori_cap,
+               gestori.via gestori_via,
+               gestori.provincia gestori_provincia,
+               gestori.numero_civico gestori_numero_civico,
+               gestori.username gestori_username,
+               gestori.password gestori_password,
+               pizzerie.id pizzerie_id,
+               pizzerie.nome pizzerie_nome
+               
+               from gestori 
+               join pizzerie on gestori.pizzeria_id = pizzerie.id";
+        $mysqli = Db::getInstance()->connectDb();
+        if (!isset($mysqli)) {
+            error_log("[getListaGestori] impossibile inizializzare il database");
+            $mysqli->close();
+            return $gestori;
+        }
+        $result = $mysqli->query($query);
+        if ($mysqli->errno > 0) {
+            error_log("[getListaGestori] impossibile eseguire la query");
+            $mysqli->close();
+            return $gestori;
+        }
+
+        while ($row = $result->fetch_array()) {
+            $gestori[] = self::creaGestoreDaArray($row);
+        }
+
+        $mysqli->close();
+        return $gestori;
+    }
+
 
     /**
      * Restituisce la lista degli studenti presenti nel sistema
@@ -513,6 +605,49 @@ class UserFactory {
                 return $toRet;
                 break;
 
+            case User::Gestore:
+                $query = "select 
+               gestori.id gestori_id,
+               gestori.nome gestori_nome,
+               gestori.cognome gestori_cognome,
+               gestori.email gestori_email,
+               gestori.citta gestori_citta,
+               gestori.cap gestori_cap,
+               gestori.via gestori_via,
+               gestori.provincia gestori_provincia,
+               gestori.numero_civico gestori_numero_civico,
+               gestori.username gestori_username,
+               gestori.password gestori_password,
+               pizzerie.id pizzerie_id,
+               pizzerie.nome pizzerie_nome
+               
+               from gestori 
+               join pizzerie on gestori.pizzeria_id = pizzerie.id
+               where gestori.id = ?";
+
+                $stmt = $mysqli->stmt_init();
+                $stmt->prepare($query);
+                if (!$stmt) {
+                    error_log("[cercaUtentePerId] impossibile" .
+                            " inizializzare il prepared statement");
+                    $mysqli->close();
+                    return null;
+                }
+
+                if (!$stmt->bind_param('i', $intval)) {
+                    error_log("[loadUser] impossibile" .
+                            " effettuare il binding in input");
+                    $mysqli->close();
+                    return null;
+                }
+
+                $toRet =  self::caricaGestoreDaStmt($stmt);
+                $mysqli->close();
+                return $toRet;
+                break;
+
+
+
             default: return null;
         }
     }
@@ -593,6 +728,29 @@ class UserFactory {
         $docente->setDipartimento(DipartimentoFactory::instance()->creaDaArray($row));
         return $docente;
     }
+/**
+     * Crea un gestore da una riga del db
+     * @param type $row
+     * @return \Docente
+     */
+    public function creaGestoreDaArray($row) {
+        $gestore = new Docente();
+        $gestore->setId($row['gestori_id']);
+        $gestore->setNome($row['gestori_nome']);
+        $gestore->setCognome($row['gestori_cognome']);
+        $gestore->setEmail($row['gestori_email']);
+        $gestore->setCap($row['gestori_cap']);
+        $gestore->setCitta($row['gestori_citta']);
+        $gestore->setVia($row['gestori_via']);
+        $gestore->setProvincia($row['gestori_provincia']);
+        $gestore->setNumeroCivico($row['gestori_numero_civico']);
+        $gestore->setRuolo(User::Gestore);
+        $gestore->setUsername($row['gestori_username']);
+        $gestore->setPassword($row['gestori_password']);
+
+        $gestore->setPizzeria(PizzeriaFactory::instance()->creaDaArray($row));
+        return $gestore;
+    }
 
     /**
      * Salva i dati relativi ad un utente sul db
@@ -618,6 +776,9 @@ class UserFactory {
             case User::Cliente:
                 $count = $this->salvaCliente($user, $stmt);
 
+                break;
+            case User::Gestore:
+                $count = $this->salvaGestore($user, $stmt);
                 break;
             case User::Docente:
                 $count = $this->salvaDocente($user, $stmt);
@@ -694,7 +855,7 @@ class UserFactory {
                     ";
         $stmt->prepare($query);
         if (!$stmt) {
-            error_log("[salvaStudente] impossibile" .
+            error_log("[salvaDocente] impossibile" .
                     " inizializzare il prepared statement");
             return 0;
         }
@@ -726,6 +887,59 @@ class UserFactory {
 
         return $stmt->affected_rows;
     }
+    
+    private function salvaGestore(Gestore $d, mysqli_stmt $stmt) {
+        $query = " update gestori set 
+                    password = ?,
+                    nome = ?,
+                    cognome = ?,
+                    email = ?,
+                    citta = ?,
+                    provincia = ?,
+                    cap = ?,
+                    via = ?,
+                    numero_civico = ?,
+                    pizzeria_id = ?
+                    where gestori.id = ?
+                    ";
+        $stmt->prepare($query);
+        if (!$stmt) {
+            error_log("[salvaGestore] impossibile" .
+                    " inizializzare il prepared statement");
+            return 0;
+        }
+
+        if (!$stmt->bind_param('sssssssssiii', 
+                $d->getPassword(), 
+                $d->getNome(), 
+                $d->getCognome(), 
+                $d->getEmail(), 
+                $d->getCitta(),
+                $d->getProvincia(),
+                $d->getCap(), 
+                $d->getVia(), 
+                $d->getNumeroCivico(), 
+                $d->getPizzeria()->getId(),
+                $d->getId())) {
+
+            error_log("[salvaGestore] impossibile" .
+                    " effettuare il binding in input");
+            return 0;
+        }
+
+        if (!$stmt->execute()) {
+            error_log("[caricaIscritti] impossibile" .
+                    " eseguire lo statement");
+            return 0;
+        }
+
+        return $stmt->affected_rows;
+    }
+    
+    
+    
+    
+    
 
     /**
      * Carica un docente eseguendo un prepared statement
@@ -770,6 +984,54 @@ class UserFactory {
 
         return self::creaDocenteDaArray($row);
     }
+    
+    /**
+     * Carica un gestore eseguendo un prepared statement
+     * @param mysqli_stmt $stmt
+     * @return null
+     */
+    private function caricaGestoreDaStmt(mysqli_stmt $stmt) {
+
+        if (!$stmt->execute()) {
+            error_log("[caricaGestoreDaStmt] impossibile" .
+                    " eseguire lo statement");
+            return null;
+        }
+
+        $row = array();
+        $bind = $stmt->bind_result(
+                $row['gestori_id'], 
+                $row['gestori_nome'], 
+                $row['gestori_cognome'], 
+                $row['gestori_email'], 
+                $row['gestori_citta'],
+                $row['gestori_cap'],
+                $row['gestori_via'],
+                $row['gestori_provincia'], 
+                $row['gestori_numero_civico'],
+                $row['gestori_username'], 
+                $row['gestori_password'], 
+                $row['pizzerie_id'], 
+                $row['dipartimenti_nome']);
+        if (!$bind) {
+            error_log("[caricaGestoreDaStmt] impossibile" .
+                    " effettuare il binding in output");
+            return null;
+        }
+
+        if (!$stmt->fetch()) {
+            return null;
+        }
+
+        $stmt->close();
+
+        return self::creaGestoreDaArray($row);
+    }
+    
+    
+    
+    
+    
 
     /**
      * Carica uno studente eseguendo un prepared statement
