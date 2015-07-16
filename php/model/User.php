@@ -21,6 +21,10 @@ class User {
      */
     const Cliente = 3;
 
+/**
+     * Costante che definisce il ruolo cliente
+     */
+    const Gestore = 4;
 
     
     /**

@@ -101,8 +101,9 @@ class EsameFactory {
             $mysqli->close();
             return $esami;
         }
-
-        if (!$stmt->bind_param('i', $user->getId())) {
+        
+        $value = $user->getId();
+        if (!$stmt->bind_param('i', $value)) {
             error_log("[esamiPerStudente] impossibile" .
                     " effettuare il binding in input");
             $mysqli->close();
@@ -404,7 +405,8 @@ class EsameFactory {
             return null;
         }
 
-        if (!$stmt->bind_param('i', $esame->getId())) {
+        $value = $esame->getId();
+        if (!$stmt->bind_param('i', $value)) {
             error_log("[caricaIscritti] impossibile" .
                     " effettuare il binding in input");
             $mysqli->close();

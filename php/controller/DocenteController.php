@@ -3,7 +3,7 @@
 include_once 'BaseController.php';
 include_once basename(__DIR__) . '/../model/ElencoEsami.php';
 include_once basename(__DIR__) . '/../model/DipartimentoFactory.php';
-include_once basename(__DIR__) . '/../model/UserFactory.php';
+//include_once basename(__DIR__) . '/../model/UserFactory.php';
 
 /**
  * Controller che gestisce la modifica dei dati dell'applicazione relativa ai 

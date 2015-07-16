@@ -2,7 +2,7 @@
 
 include_once 'BaseController.php';
 //include_once basename(__DIR__) . '/../model/EsameFactory.php'; ORDINE
-//include_once basename(__DIR__) . '/../model/AppelloFactory.php';
+//include_once basename(__DIR__) . '/../model/DettaglioOrdineFactory.php';
 include_once basename(__DIR__) . '/../model/OrdineFactory.php';
 
 /**
@@ -68,20 +68,24 @@ class ClienteController extends BaseController {
                     case 'anagrafica':
                         $vd->setSottoPagina('anagrafica');
                         break;
-
-                    // effettua un ordine
-                    case 'ordina':
-                        /*// carichiamo gli appelli dal db
-                        $appelli = AppelloFactory::instance()->getAppelliPerStudente($user);
-                        $vd->setSottoPagina('iscrizione');*/
-                        break;
-                        
+   
                     // visualizzazione degli esami sostenuti
-                    case 'lista_ordini':
-                        $esami = OrdineFactory::instance()->ordiniPerCliente($user);
-                        $vd->setSottoPagina('lista_ordini');
+                    case 'ordini':
+                        $ordini = OrdineFactory::instance()->ordiniPerCliente($user);
+                        $vd->setSottoPagina('ordini');
                         break;
                         
+    /*                case 'dettaglio_ordine':
+                        $msg = array();
+                        $ordini = OrdineFactory::instance()->ordiniPerCliente($user);
+                        $mod_ordine = $this->getDettaglioOrdine($request, $msg);
+                        if (!isset($mod_ordine)) {
+                            $vd->setSottoPagina('ordini');
+                        } else {
+                            $vd->setSottoPagina('dettaglio_ordine');
+                        }
+                        break;
+    */                    
                     default:
 
                         $vd->setSottoPagina('home');
@@ -168,7 +172,24 @@ class ClienteController extends BaseController {
         require basename(__DIR__) . '/../view/master.php';
     }
 
+/*private function getDettaglioOrdine(&$request, &$msg) {
+        if (isset($request['dettaglio_ordine'])) {
+            $ordine_id = filter_var($request['dettaglio_ordine'], FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
+            $dettaglio_ordine = DettaglioOrdineFactory::instance()->cercaDettaglioOrdinePerIdOrdine($ordine_id);
+            if ($ordine == null) {
+                $msg[] = "L'ordine selezionato non &egrave; corretto</li>";
+            }
+            return $dettaglio_ordine;
+        } else {
+            return null;
+        }
+    }
+*/
+
 
 }
+
+
+
 
 ?>

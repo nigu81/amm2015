@@ -3,16 +3,21 @@ switch ($vd->getSottoPagina()) {
     case 'anagrafica':
         include_once 'anagrafica.php';
         break;
-    case 'lista_ordini':
-        include_once 'lista_ordini.php';
+
+    case 'ordini':
+        include_once 'ordini.php';
         break;
 
-    case 'ordine':
-        include_once 'ordine.php';
+    case 'iscrizione':
+        include_once 'iscrizione.php';
         break;
-    default:
         
-        ?>
+    case 'dettaglio_ordine';
+        include_once 'ordini.php';
+        include_once 'dettaglio_ordine.php';
+        break;
+     ?>
+    <?php default: ?>
         <h2 class="icon-title" id="h-home">Pannello di Controllo</h2>
         <p>
             Benvenuto, <?= $user->getNome() ?>
@@ -25,10 +30,8 @@ switch ($vd->getSottoPagina()) {
                     Anagrafica
                 </a>
             </li>
-
-            <li><a href="cliente/lista_ordini<?= $vd->scriviToken('?')?>" id="pnl-libretto">Lista Ordini</a></li>
-            <li><a href="cliente/ordine<?= $vd->scriviToken('?')?>" id="pnl-iscrizione">Effettua un ordine</a></li>
-
+            <li><a href="cliente/ordini<?= $vd->scriviToken('?')?>" id="pnl-libretto">Ordini</a></li>
+            <li><a href="cliente/iscrizione<?= $vd->scriviToken('?')?>" id="pnl-iscrizione">Iscrizione</a></li>
         </ul>
         <?php
         break;

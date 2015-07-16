@@ -17,7 +17,7 @@ ordini_clienti.pizzeria_id = pizzerie.id
 JOIN ordini ON
 ordini_clienti.ordine_id = ordini.id
 
-WHERE pizzerie.id = 1
+WHERE clienti.id = 1
 
 GROUP BY ordini_clienti.ordine_id
 
