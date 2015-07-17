@@ -1,6 +1,6 @@
 <?php
 
-include_once 'Cliente.php';
+//include_once 'Cliente.php';
 include_once 'Pizzeria.php';
 include_once 'Gestore.php';
 
@@ -11,6 +11,7 @@ class Ordine {
 	private $pizzeria;
 	private $status;
 	private $data;
+	private $items;
 	
 	public function __construct(){
 		
@@ -59,6 +60,7 @@ class Ordine {
 	public function setData($data){
 		$this->data = $data;
 	}
+	
 }
 
 

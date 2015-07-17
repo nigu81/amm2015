@@ -1,7 +1,7 @@
 <?php
 
 include_once 'Ordine.php';
-include_once 'Cliente.php';
+//include_once 'Cliente.php';
 include_once 'Pizzeria.php';
 include_once 'UserFactory.php';
 

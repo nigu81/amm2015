@@ -2,7 +2,7 @@
 
 include_once 'BaseController.php';
 //include_once basename(__DIR__) . '/../model/EsameFactory.php'; ORDINE
-//include_once basename(__DIR__) . '/../model/DettaglioOrdineFactory.php';
+include_once basename(__DIR__) . '/../model/DettagliOrdineFactory.php';
 include_once basename(__DIR__) . '/../model/OrdineFactory.php';
 
 /**
@@ -15,7 +15,7 @@ class ClienteController extends BaseController {
 
 
     //const appelli = 'appelli';
-    const lista_ordini = 'lista_ordini';
+   // const lista_ordini = 'lista_ordini';
 
     /**
      * Costruttore
@@ -75,17 +75,22 @@ class ClienteController extends BaseController {
                         $vd->setSottoPagina('ordini');
                         break;
                         
-    /*                case 'dettaglio_ordine':
-                        $msg = array();
-                        $ordini = OrdineFactory::instance()->ordiniPerCliente($user);
-                        $mod_ordine = $this->getDettaglioOrdine($request, $msg);
-                        if (!isset($mod_ordine)) {
-                            $vd->setSottoPagina('ordini');
-                        } else {
-                            $vd->setSottoPagina('dettaglio_ordine');
-                        }
+                    case 'dettaglio_ordine':
+                    
+                    
+                    
+                  //     $msg = array();
+                       $ordini = OrdineFactory::instance()->ordiniPerCliente($user);
+                      
+                        $dettagli_ordine = DettagliOrdineFactory::instance()->dettagliOrdinePerOrdine($request['ordine']);
+                        $vd->setSottoPagina('dettaglio_ordine');
                         break;
-    */                    
+                        
+                    case 'crea_ordine':
+                        //$ordini = OrdineFactory::instance()->ordiniPerCliente($user);
+                        $vd->setSottoPagina('crea_ordine');
+                        break;
+                        
                     default:
 
                         $vd->setSottoPagina('home');
@@ -172,11 +177,11 @@ class ClienteController extends BaseController {
         require basename(__DIR__) . '/../view/master.php';
     }
 
-/*private function getDettaglioOrdine(&$request, &$msg) {
-        if (isset($request['dettaglio_ordine'])) {
-            $ordine_id = filter_var($request['dettaglio_ordine'], FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
-            $dettaglio_ordine = DettaglioOrdineFactory::instance()->cercaDettaglioOrdinePerIdOrdine($ordine_id);
-            if ($ordine == null) {
+private function getDettaglioOrdine(&$request, &$msg) {
+        if (isset($request['ordine'])) {
+            $ordine_id = filter_var($request['ordine'], FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
+            $dettaglio_ordine = DettaglioOrdineFactory::instance()->cercaItemsPerOrdine($ordine_id);
+            if ($ordine_id == null) {
                 $msg[] = "L'ordine selezionato non &egrave; corretto</li>";
             }
             return $dettaglio_ordine;
@@ -184,7 +189,7 @@ class ClienteController extends BaseController {
             return null;
         }
     }
-*/
+
 
 
 }

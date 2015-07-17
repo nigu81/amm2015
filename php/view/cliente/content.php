@@ -12,9 +12,12 @@ switch ($vd->getSottoPagina()) {
         include_once 'iscrizione.php';
         break;
         
-    case 'dettaglio_ordine';
+    case 'dettaglio_ordine':
         include_once 'ordini.php';
         include_once 'dettaglio_ordine.php';
+        break;
+    case 'crea_ordine';
+        include_once 'crea_ordine.php';
         break;
      ?>
     <?php default: ?>
@@ -31,7 +34,7 @@ switch ($vd->getSottoPagina()) {
                 </a>
             </li>
             <li><a href="cliente/ordini<?= $vd->scriviToken('?')?>" id="pnl-libretto">Ordini</a></li>
-            <li><a href="cliente/iscrizione<?= $vd->scriviToken('?')?>" id="pnl-iscrizione">Iscrizione</a></li>
+            <li><a href="cliente/crea_ordine<?= $vd->scriviToken('?')?>" id="pnl-iscrizione">Nuovo Ordine</a></li>
         </ul>
         <?php
         break;
