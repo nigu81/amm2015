@@ -9,9 +9,10 @@
         <thead>
             <tr>
                 <th class="esami-col-large">Ordine</th>
-                <th class="esami-col-small">Stauts</th>
+                <th class="esami-col-small">Status</th>
                 <th class="esami-col-small">Data</th>
                 <th class="esami-col-large">Pizzeria</th>
+                <th class="esami-col-large">Importo</th>
                 <th class="esami-col-large">Dettaglio</th>
             </tr>
         </thead>
@@ -24,8 +25,9 @@
                 <tr <?= $i % 2 == 0 ? 'class="alt-row"' : '' ?>>
                     <td><?= $ordine->getId() ?></td>
                     <td><?= $ordine->getStatus() ?></td>
-                    <td><?= $ordine->getData() ?></td>
+                    <td><?= $ordine->getData()->format('d/m/Y') ?></td>
                     <td><?= $ordine->getPizzeria() ?></td>
+                    <td><?= $ordine->getImporto() ?></td>
                     <td>
                         <a href="cliente/dettaglio_ordine?ordine=<?= $ordine->getId() ?><?= $vd->scriviToken('&') ?>" title="Dettaglio Ordine">
                         Apri Ordine

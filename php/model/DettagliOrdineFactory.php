@@ -117,6 +117,73 @@ class DettagliOrdineFactory {
         $dettagli_ordine->setQta($row['qta']);
         return $dettagli_ordine;
     }
+    
+    
+    public function nuovo(DettagliOrdine $dettaglio_ordine, &$request){
+        $query = "insert into ordini_clienti (ordine_id, pizzeria_id, cliente_id, pizza_id, qta)
+                  values (?, ?, ?,?,?)";
+        return $this->modificaDB($dettaglio_ordine, $query, $request);
+    }	
+    
+    private function modificaDB(DettagliOrdine $dettaglio_ordine, $query, &$request){
+        $mysqli = Db::getInstance()->connectDb();
+        if (!isset($mysqli)) {
+            error_log("[salva] impossibile inizializzare il database");
+            return 0;
+        }
+
+        $stmt = $mysqli->stmt_init();
+       
+        $stmt->prepare($query);
+        if (!$stmt) {
+            error_log("[modificaDB] impossibile" .
+                    " inizializzare il prepared statement");
+            $mysqli->close();
+            return 0;
+        }
+
+        if (!$stmt->bind_param('iiiii', 
+            $request['ordine_id'],
+            $request['pizzeria_id'],
+                $request['cliente_id'],
+                $request['pizza_id'],
+                $request['qta']
+                )) {
+            error_log("[modificaDB] impossibile" .
+                    " effettuare il binding in input");
+            $mysqli->close();
+            return 0;
+        }
+
+        if (!$stmt->execute()) {
+            error_log("[modificaDB] impossibile" .
+                    " eseguire lo statement");
+            $mysqli->close();
+            return 0;
+        }
+
+        $mysqli->close();
+
+    }
+    
+    public function eliminaItem(&$request){
+        $mysqli = Db::getInstance()->connectDb();
+        if (!isset($mysqli)) {
+            error_log("[salva] impossibile inizializzare il database");
+            return 0;
+        }
+        $id_ordine = $request['ordine_id'];
+        $id_pizza = $request['pizza_id'];
+        $query = "delete from ordini_clienti
+                  where ordine_id = $id_ordine and pizza_id = $id_pizza";
+                  
+        $mysqli->query($query);
+        $mysqli->close();
+        
+    }
+    
+    
+    
 	
 }
 

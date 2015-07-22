@@ -12,6 +12,7 @@ class Ordine {
 	private $status;
 	private $data;
 	private $items;
+	private $importo;
 	
 	public function __construct(){
 		
@@ -30,7 +31,7 @@ class Ordine {
 		return $this->cliente;
 	}
 	
-	public function setCliente(Cliente $cliente){
+	public function setCliente($cliente){
 		$this->cliente = $cliente;
 	}
 	
@@ -57,9 +58,19 @@ class Ordine {
 		return $this->data;
 	}
 	
-	public function setData($data){
+	public function setData(DateTime $data){
 		$this->data = $data;
+		return true;
 	}
+	
+	public function setImporto($importo){
+		$this->importo = $importo;
+	}
+	public function getImporto(){
+		return $this->importo;
+	}
+	
+	
 	
 }
 

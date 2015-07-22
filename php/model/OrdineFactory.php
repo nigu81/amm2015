@@ -28,7 +28,8 @@ class OrdineFactory {
                     ordini_clienti.ordine_id ordine, 
                     ordini.data data, 
                     ordini.status status, 
-                    pizzerie.nome pizzeria 
+                    pizzerie.nome pizzeria,
+                    ordini.importo importo 
                     
                     FROM ordini_clienti 
                     
@@ -85,7 +86,8 @@ class OrdineFactory {
                 $row['ordine'], 
                 $row['data'], 
                 $row['status'], 
-                $row['pizzeria']);
+                $row['pizzeria'],
+                $row['importo']);
         if (!$bind) {
             error_log("[caricaOrdiniDaStmt] impossibile" .
                     " effettuare il binding in output");
@@ -104,9 +106,10 @@ class OrdineFactory {
     public function creaDaArray($row) {
         $ordine = new Ordine();
         $ordine->setId($row['ordine']);
-        $ordine->setData($row['data']);
+        $ordine->setData(new DateTime($row['data']));
         $ordine->setStatus($row['status']);
         $ordine->setPizzeria($row['pizzeria']);
+        $ordine->setImporto($row['importo']);
         return $ordine;
     }
 	
@@ -117,7 +120,8 @@ public function cercaOrdinePerId($ordine_id){
                     ordini_clienti.ordine_id ordine, 
                     ordini.data data, 
                     ordini.status status, 
-                    pizzerie.nome pizzeria 
+                    pizzerie.nome pizzeria,
+                    ordini.importo importo 
                     
                     FROM ordini_clienti 
                     
@@ -162,7 +166,56 @@ public function cercaOrdinePerId($ordine_id){
             $mysqli->close();
             return null;
         }
+    }
+    
+    
+    public function nuovo(Ordine $ordine, &$request){
+        $query = "insert into ordini (data, pizzeria_id, cliente_id)
+                  values (?, ?, ?)";
+        return $this->modificaDB($ordine, $query, $request);
     }	
+    
+    private function modificaDB(Ordine $ordine, $query, &$request){
+        $mysqli = Db::getInstance()->connectDb();
+        if (!isset($mysqli)) {
+            error_log("[salva] impossibile inizializzare il database");
+            return 0;
+        }
+
+        $stmt = $mysqli->stmt_init();
+       
+        $stmt->prepare($query);
+        if (!$stmt) {
+            error_log("[modificaDB] impossibile" .
+                    " inizializzare il prepared statement");
+            $mysqli->close();
+            return 0;
+        }
+
+        if (!$stmt->bind_param('sii',                
+                $ordine->getData()->format('Y-m-d'), 
+                $request['pizzeria_id'],
+                $request['cliente']
+                )) {
+            error_log("[modificaDB] impossibile" .
+                    " effettuare il binding in input");
+            $mysqli->close();
+            return 0;
+        }
+
+
+        if (!$stmt->execute()) {
+            error_log("[modificaDB] impossibile" .
+                    " eseguire lo statement");
+            $mysqli->close();
+            return 0;
+        }
+        
+        $id_ultimo_ordine = $mysqli->insert_id;
+        
+        $mysqli->close();
+        return $id_ultimo_ordine;
+    }
     
     
     

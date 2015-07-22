@@ -16,8 +16,17 @@ switch ($vd->getSottoPagina()) {
         include_once 'ordini.php';
         include_once 'dettaglio_ordine.php';
         break;
-    case 'crea_ordine';
+    case 'crea_ordine':
         include_once 'crea_ordine.php';
+        break;
+    case 'crea_ordine_items':
+        include_once 'crea_ordine_items.php';
+        include_once 'new_dettaglio_ordine.php';
+        break;
+    case 'elimina_item':
+    echo "POOOBA";
+        include_once 'crea_ordine_items.php';
+        include_once 'new_dettaglio_ordine.php';
         break;
      ?>
     <?php default: ?>

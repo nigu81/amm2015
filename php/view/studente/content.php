@@ -11,6 +11,7 @@ switch ($vd->getSottoPagina()) {
     case 'iscrizione':
         include_once 'iscrizione.php';
         break;
+    
     default:
         
         ?>

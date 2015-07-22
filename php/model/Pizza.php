@@ -3,7 +3,7 @@
  * Classe che rappresenta una Pizzeria
  * @author Davide Spano
  */
-class Pizzeria {
+class Pizza {
 
     /**
      * Il nome della pizzeria
@@ -16,6 +16,9 @@ class Pizzeria {
      */
     private $id;
 
+    private $descrizione;
+    
+    private $prezzo;
     
     /**
      * Costrutture di una pizzeria
@@ -62,6 +65,25 @@ class Pizzeria {
      * @return boolean true se i due oggetti sono logicamente uguali, false 
      * altrimenti
      */
+    public function setDescrizione($descrizione){
+        $this->descrizione = $descrizione;
+    }
+    
+    /**
+     * Restituisce il nome di una pizzeria
+     * @return string
+     */
+    public function getDescrizione() {
+        return $this->descrizione;
+    }
+    
+    public function setPrezzo($prezzo){
+        $this->prezzo = $prezzo;
+    }
+    
+    public function getPrezzo() {
+        return $this->prezzo;
+    }
     
     
     

@@ -1,6 +1,6 @@
 <?php
 
-include_once 'Pizzeria.php';
+include_once 'Pizza.php';
 include_once 'Db.php';
 
 /**
@@ -8,7 +8,7 @@ include_once 'Db.php';
  *
  * @author Davide Spano
  */
-class PizzeriaFactory {
+class PizzaFactory {
     
     private static $singleton;
     
@@ -22,7 +22,7 @@ class PizzeriaFactory {
      */
     public static function instance(){
         if(!isset(self::$singleton)){
-            self::$singleton = new PizzeriaFactory();
+            self::$singleton = new PizzaFactory();
         }
         
         return self::$singleton;
@@ -32,19 +32,21 @@ class PizzeriaFactory {
      * Restituisce la lista di tutti i Pizzerie
      * @return array|\Pizzeria
      */
-    public function &elencoPizzerie(){
+    public function &elencoPizze(){
         
-        $pizzerie = array();
+        $pizze = array();
         $query = "select 
-                    id pizzeria_id,
-                    nome pizzeria_nome 
+                    id pizza_id,
+                    nome pizza_nome, 
+                    descrizione pizza_descrizione,
+                    prezzo pizza_prezzo
                   from 
-                     pizzerie";
+                     pizze";
         $mysqli = Db::getInstance()->connectDb();
         if(!isset($mysqli)){
             error_log("[getPizzerie] impossibile inizializzare il database");
             $mysqli->close();
-            return $pizzerie;
+            return $pizze;
         }
         
         
@@ -52,17 +54,17 @@ class PizzeriaFactory {
         if($mysqli->errno > 0){
             error_log("[getPizzerie] impossibile eseguire la query");
             $mysqli->close();
-            return $pizzerie;
+            return $pizze;
         }
-        // DA MODIFICARE QUA
+        
         while($row = $result->fetch_array()){
-            $pizzerie[] = self::getPizzeria($row);
+            $pizze[] = self::getPizze($row);
         }
         
         
         
         $mysqli->close();
-        return $pizzerie;
+        return $pizze;
     }
     
     /**
@@ -81,13 +83,14 @@ class PizzeriaFactory {
      * @param type $row
      * @return \Pizzeria
      */
-    private function getPizzeria($row){
-        $pizzeria = new Pizzeria();
+    private function getPizze($row){
+        $pizza = new Pizza();
         
-        $pizzeria->setId($row['pizzeria_id']);
-        $pizzeria->setNome($row['pizzeria_nome']);
-        
-        return $pizzeria;
+        $pizza->setId($row['pizza_id']);
+        $pizza->setNome($row['pizza_nome']);
+        $pizza->setDescrizione($row['pizza_descrizione']);
+        $pizza->setPrezzo($row['pizza_prezzo']);
+        return $pizza;
     }
     
    
