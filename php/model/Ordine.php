@@ -31,6 +31,8 @@ class Ordine {
 		return $this->cliente;
 	}
 	
+	
+	
 	public function setCliente($cliente){
 		$this->cliente = $cliente;
 	}

@@ -1,14 +1,12 @@
 <?php
-
 include_once 'Ordine.php';
 //include_once 'Cliente.php';
 include_once 'Pizzeria.php';
 include_once 'UserFactory.php';
-
+//include_once 'DettagliOrdineFactory.php';
 class OrdineFactory {
 	
 	private static $singleton;
-
     private function __constructor() {
         
     }
@@ -17,7 +15,6 @@ class OrdineFactory {
         if (!isset(self::$singleton)) {
             self::$singleton = new OrdineFactory();
         }
-
         return self::$singleton;
     }
 	
@@ -46,7 +43,6 @@ class OrdineFactory {
             $mysqli->close();
             return $ordini;
         }
-
         $stmt = $mysqli->stmt_init();
         $stmt->prepare($query);
         
@@ -64,7 +60,6 @@ class OrdineFactory {
             $mysqli->close();
             return $ordini;
         }
-
         $ordini = self::caricaOrdiniDaStmt($stmt);
         
         $mysqli->close();
@@ -79,7 +74,6 @@ class OrdineFactory {
                     " eseguire lo statement");
             return null;
         }
-
         $row = array();
         
         $bind = $stmt->bind_result(
@@ -93,13 +87,10 @@ class OrdineFactory {
                     " effettuare il binding in output");
             return null;
         }
-
         while ($stmt->fetch()) {
             $ordini[] = self::creaDaArray($row);
         }
-
         $stmt->close();
-
         return $ordini;
     }
     
@@ -107,8 +98,18 @@ class OrdineFactory {
         $ordine = new Ordine();
         $ordine->setId($row['ordine']);
         $ordine->setData(new DateTime($row['data']));
-        $ordine->setStatus($row['status']);
-        $ordine->setPizzeria($row['pizzeria']);
+        if (isset($row['status'])){
+            $ordine->setStatus($row['status']);
+        }
+        
+        if (isset($row['pizzeria'])){
+            $ordine->setPizzeria($row['pizzeria']);    
+        }
+        if (isset($row['cliente'])){
+            $ordine->setCliente($row['cliente']);    
+        }
+         
+        
         $ordine->setImporto($row['importo']);
         return $ordine;
     }
@@ -129,7 +130,7 @@ public function cercaOrdinePerId($ordine_id){
                     JOIN pizzerie ON ordini_clienti.pizzeria_id = pizzerie.id 
                     JOIN ordini ON ordini_clienti.ordine_id = ordini.id 
                     
-                    WHERE ordine.id = ?
+                    WHERE ordini.id = ?
                     GROUP BY ordini_clienti.ordine_id";
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
@@ -146,7 +147,6 @@ public function cercaOrdinePerId($ordine_id){
             $mysqli->close();
             return $ordini;
         }
-
         
         if (!$stmt->bind_param('i', $ordine_id)) {
             error_log("[cercaOrdinePerId] impossibile" .
@@ -154,11 +154,10 @@ public function cercaOrdinePerId($ordine_id){
             $mysqli->close();
             return $ordini;
         }
-
         $ordini =  self::caricaOrdiniDaStmt($stmt);
-        foreach($ordini as $pizze){
-            DettaglioOrdineFactory::caricaDettaglioOrdine($pizze);
-        }
+        /*foreach($ordini as $pizze){
+            DettagliOrdineFactory::caricaDettagliOrdine($pizze);
+        }*/
         if(count($ordini > 0)){
             $mysqli->close();
             return $ordini[0];
@@ -181,7 +180,6 @@ public function cercaOrdinePerId($ordine_id){
             error_log("[salva] impossibile inizializzare il database");
             return 0;
         }
-
         $stmt = $mysqli->stmt_init();
        
         $stmt->prepare($query);
@@ -191,7 +189,6 @@ public function cercaOrdinePerId($ordine_id){
             $mysqli->close();
             return 0;
         }
-
         if (!$stmt->bind_param('sii',                
                 $ordine->getData()->format('Y-m-d'), 
                 $request['pizzeria_id'],
@@ -202,8 +199,6 @@ public function cercaOrdinePerId($ordine_id){
             $mysqli->close();
             return 0;
         }
-
-
         if (!$stmt->execute()) {
             error_log("[modificaDB] impossibile" .
                     " eseguire lo statement");
@@ -218,11 +213,81 @@ public function cercaOrdinePerId($ordine_id){
     }
     
     
+    public function &cercaOrdiniPerPizzeria($status, $pizzeria){
+        
+        $ordini = array();
+        $query = "SELECT 
+                    ordini_clienti.ordine_id ordine, 
+                    ordini.data data, 
+                    clienti.cognome cliente_cognome, 
+                    ordini.importo importo 
+                    FROM ordini_clienti 
+                    JOIN ordini ON ordini_clienti.ordine_id = ordini.id 
+                    JOIN clienti ON ordini_clienti.cliente_id = clienti.id 
+                    JOIN pizzerie ON ordini_clienti.pizzeria_id = pizzerie.id 
+                    WHERE ordini.status = ? AND ordini.pizzeria_id = ? 
+                    GROUP BY ordini_clienti.ordine_id";
+       
+        $mysqli = Db::getInstance()->connectDb();
+        if (!isset($mysqli)) {
+            error_log("[ordiniPerCliente] impossibile inizializzare il database");
+            $mysqli->close();
+            return $ordini;
+        }
+        $stmt = $mysqli->stmt_init();
+        $stmt->prepare($query);
+        
+        if (!$stmt) {
+            error_log("[ordiniPerCliente] impossibile" .
+                    " inizializzare il prepared statement");
+            $mysqli->close();
+            return $ordini;
+        }
+        
+        
+        
+        if (!$stmt->bind_param('ii', $status, $pizzeria)) {
+            error_log("[ordiniPerCliente] impossibile" .
+                    " effettuare il binding in input");
+            $mysqli->close();
+            return $ordini;
+        }
+        $ordini = self::caricaOrdiniPizzeriaDaStmt($stmt);
+        
+        $mysqli->close();
+        return $ordini;
+		
+	}
+    
+    
+    
+    public function &caricaOrdiniPizzeriaDaStmt(mysqli_stmt $stmt) {
+        $ordini = array();
+        if (!$stmt->execute()) {
+            error_log("[caricaOrdiniDaStmt] impossibile" .
+                    " eseguire lo statement");
+            return null;
+        }
+        $row = array();
+        
+        $bind = $stmt->bind_result(
+                $row['ordine'], 
+                $row['data'], 
+                $row['cliente'], 
+                $row['importo']);
+        if (!$bind) {
+            error_log("[caricaOrdiniDaStmt] impossibile" .
+                    " effettuare il binding in output");
+            return null;
+        }
+        while ($stmt->fetch()) {
+            $ordini[] = self::creaDaArray($row);
+        }
+        $stmt->close();
+        return $ordini;
+    }
+    
     
 	
 }
-
-
-
-
 ?>

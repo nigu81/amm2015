@@ -1,9 +1,9 @@
 <?php
 
 include_once 'BaseController.php';
-include_once basename(__DIR__) . '/../model/ElencoEsami.php';
-include_once basename(__DIR__) . '/../model/DipartimentoFactory.php';
-include_once basename(__DIR__) . '/../model/UserFactory.php';
+//include_once basename(__DIR__) . '/../model/ElencoEsami.php';
+include_once basename(__DIR__) . '/../model/PizzeriaFactory.php';
+//include_once basename(__DIR__) . '/../model/UserFactory.php';
 
 /**
  * Controller che gestisce la modifica dei dati dell'applicazione relativa ai 
@@ -11,7 +11,7 @@ include_once basename(__DIR__) . '/../model/UserFactory.php';
  *
  * @author Davide Spano
  */
-class DocenteController extends BaseController {
+class GestoreController extends BaseController {
 
     const elenco = 'elenco';
 
@@ -56,7 +56,26 @@ class DocenteController extends BaseController {
                         $dipartimenti = DipartimentoFactory::instance()->getDipartimenti();
                         $vd->setSottoPagina('anagrafica');
                         break;
-
+                    
+                    case 'ordini_pizzeria':
+                        
+                        $vd->setSottoPagina('ordini_pizzeria');
+                        break;
+                    case 'cerca_ordini':
+                        $pizzeria = $user->getPizzeria()->getId();
+                        
+                        $ordini = OrdineFactory::instance()->cercaOrdiniPerPizzeria($request['status'], $pizzeria);
+                        $vd->setSottoPagina('ordini_pizzeria');
+                        break;                 
+                    case 'lavora_ordine':
+                        $vd->setSottoPagina('lavora_ordine');
+                        break;
+                    case 'dettaglio_ordine_da_lavorare':
+                        $ordini = OrdineFactory::instance()->cercaOrdinePerId($request['ordine']);
+                        
+                        $dettagli_ordine = DettagliOrdineFactory::instance()->dettagliOrdinePerOrdine($request['ordine']);
+                        $vd->setSottoPagina('dettaglio_ordine_da_lavorare');
+                        break;
                     // inserimento di una lista di appelli
                     case 'appelli':
                         $appelli = AppelloFactory::instance()->getAppelliPerDocente($user);
@@ -191,30 +210,32 @@ class DocenteController extends BaseController {
                         break;
 
                     // visualizzazione dell'elenco esami
-                    case 'el_esami':
-                        $insegnamenti = InsegnamentoFactory::instance()->getListaInsegnamentiPerDocente($user);
-                        $vd->setSottoPagina('el_esami');
+                    case 'el_ordini':
+                        $ordini = OrdineFactory::instance()->ordiniPerPizzeria($user->getPizzeria());
+                        $vd->setSottoPagina('el_ordini');
                         $vd->addScript("../js/jquery-2.1.1.min.js");
-                        $vd->addScript("../js/elencoEsami.js");
+                        $vd->addScript("../js/elencoOrdini.js");
+                        
                         break;
 
                     // gestione della richiesta ajax di filtro esami
-                    case 'filtra_esami':
+                    case 'filtra_ordini':
+                    echo "STO FILTRANDO";
                         $vd->toggleJson();
-                        $vd->setSottoPagina('el_esami_json');
+                        $vd->setSottoPagina('el_ordini_json');
                         $errori = array();
 
-                        if (isset($request['insegnamento']) && ($request['insegnamento'] != '')) {
-                            $insegnamento_id = filter_var($request['insegnamento'], FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
-                            if($insegnamento_id == null){
-                                $errori['insegnamento'] = "Specificare un identificatore valido";
+                        if (isset($request['ordine']) && ($request['ordine'] != '')) {
+                            $ordine_id = filter_var($request['ordine'], FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
+                            if($ordine_id == null){
+                                $errori['ordine'] = "Specificare un identificatore valido";
                             }
                         } else {
-                            $insegnamento_id = null;
+                            $ordine_id = null;
                             
                         }
 
-                        if (isset($request['matricola']) && ($request['matricola'] != '')) {
+                        /*if (isset($request['matricola']) && ($request['matricola'] != '')) {
                             $matricola = filter_var($request['matricola'], FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
                             if($matricola == null){
                                 $errori['matricola'] = "Specificare una matricola valida";
@@ -222,7 +243,7 @@ class DocenteController extends BaseController {
                         } else {
                             $matricola = null;
                             
-                        }
+                        }*/
 
                         if (isset($request['cognome'])) {
                             $cognome = $request['cognome'];
@@ -230,17 +251,18 @@ class DocenteController extends BaseController {
                             $cognome = null;
                         }
 
-                        if (isset($request['nome'])) {
+                        /*if (isset($request['nome'])) {
                             $nome = $request['nome'];
                         }else{
                             $nome = null;
-                        }
+                        }*/
 
                         
-                        $esami = EsameFactory::instance()->ricercaEsami(
+                        $ordini = OrdineFactory::instance()->ricercaOrdini(
                                 $user, 
-                                $insegnamento_id, 
-                                $matricola, $nome, $cognome);
+                               // $request['pizzeria'], 
+                                $status
+                                );
 
                         break;
 
@@ -587,6 +609,7 @@ class DocenteController extends BaseController {
 
                     // ricerca di un esame
                     case 'e_cerca':
+                        echo "IO QUA CI ENTRO";
                         $msg = array();
                         $this->creaFeedbackUtente($msg, $vd, "Lo implementiamo con il db, fai conto che abbia funzionato ;)");
                         $this->showHomeUtente($vd);

@@ -4,48 +4,28 @@ switch ($vd->getSottoPagina()) {
         include 'anagrafica.php';
         break;
 
-    case 'appelli':
-        include 'appelli.php';
+    
+    case 'ordini_pizzeria':
+        include 'ordini_pizzeria.php';
+        include 'dettaglio_ordine_filtro.php';
         break;
     
-    case 'appelli_modifica':
-        include 'appelli.php';
-        include 'appelli_modifica.php';
+    case 'el_ordini':
+        include 'el_ordini.php';
         break;
     
-    case 'appelli_crea':
-        include 'appelli.php';
-        include 'appelli_crea.php';
+    case 'el_ordini_json':
+        include 'el_ordini_json.php';
         break;
-    
-    case 'appelli_iscritti':
-        include 'appelli.php';
-        include 'appelli_iscritti.php';
+   case 'lavora_ordine':
+   include 'ordini_lavorazione.php';
         break;
-    
-    case 'reg_esami':
-        include 'reg_esami.php';
-        break;
-    
-    case 'reg_esami_step1':
-        include 'reg_esami_step1.php';
-        break;
-    
-    case 'reg_esami_step2':
-        include 'reg_esami_step2.php';
-        break;
-    
-     case 'reg_esami_step3':
-        include 'reg_esami_step3.php';
-        break;
-    
-    case 'el_esami':
-        include 'el_esami.php';
-        break;
-    
-    case 'el_esami_json':
-        include 'el_esami_json.php';
-        break;
+   
+   case 'dettaglio_ordine_da_lavorare':
+   include 'lavora_dettaglio_ordine.php';
+        break;     
+        
+        
         ?>
         
 
@@ -58,13 +38,13 @@ switch ($vd->getSottoPagina()) {
             Scegli una fra le seguenti sezioni:
         </p>
         <ul class="panel">
-            <li><a href="docente/anagrafica<?= $vd->scriviToken('?')?>" id="pnl-anagrafica">
+            <li><a href="gestore/anagrafica<?= $vd->scriviToken('?')?>" id="pnl-anagrafica">
                     Anagrafica
                 </a>
             </li>
-            <li><a href="docente/appelli<?= $vd->scriviToken('?')?>" id="pnl-iscrizione">Appelli</a></li>
-            <li><a href="docente/reg_esami<?= $vd->scriviToken('?')?>" id="pnl-libretto">Registrazione Esami</a></li>
-            <li><a href="docente/el_esami<?= $vd->scriviToken('?')?>" id="pnl-cerca">Elenco Esami</a></li>
+            <li><a href="gestore/ordini_pizzeria<?= $vd->scriviToken('?')?>" id="pnl-cerca">Elenco Ordini</a></li>
+            <li><a href="gestore/lavora_ordine<?= $vd->scriviToken('?')?>" id="pnl-libretto">Lavora Ordine</a></li>
+            
         </ul>
         <?php
         break;

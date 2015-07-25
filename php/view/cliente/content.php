@@ -24,7 +24,7 @@ switch ($vd->getSottoPagina()) {
         include_once 'new_dettaglio_ordine.php';
         break;
     case 'elimina_item':
-    echo "POOOBA";
+    
         include_once 'crea_ordine_items.php';
         include_once 'new_dettaglio_ordine.php';
         break;

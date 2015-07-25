@@ -5,6 +5,7 @@ include_once 'controller/BaseController.php';
 include_once 'controller/StudenteController.php';
 include_once 'controller/DocenteController.php';
 include_once 'controller/ClienteController.php';
+include_once 'controller/GestoreController.php';
 
 date_default_timezone_set("Europe/Rome");
 // punto unico di accesso all'applicazione
@@ -58,7 +59,17 @@ class FrontController {
                     }
                     $controller->handleInput($request);
                     break;
-
+            case 'gestore':
+                    // la pagina dei clienti e' accessibile solo ai clienti
+                    // ai clienti ed agli amminstratori
+                    // il controllo viene fatto dal controller apposito
+                    $controller = new GestoreController();
+                    if (isset($_SESSION[BaseController::role]) &&
+                        $_SESSION[BaseController::role] != User::Gestore) {
+                        self::write403();
+                    }
+                    $controller->handleInput($request);
+                    break;
                 // docente
                 case 'docente':
 

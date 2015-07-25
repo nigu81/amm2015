@@ -360,7 +360,24 @@ class UserFactory {
      */
     public function &getListaClienti() {
         $clienti = array();
-        $query = "select * from clienti ";
+        $query = "select 
+            clienti.id clienti_id,
+            clienti.nome clienti_nome,
+            clienti.cognome clienti_cognome,
+
+            clienti.email clienti_email,
+            clienti.citta clienti_citta,
+            clienti.via clienti_via,
+            clienti.cap clienti_cap,
+            clienti.provincia clienti_provincia, 
+            clienti.numero_civico clienti_numero_civico,
+            clienti.username clienti_username,
+
+            clienti.password clienti_password
+            
+            from clienti 
+
+            ";
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
             error_log("[getListaClienti] impossibile inizializzare il database");
@@ -734,7 +751,7 @@ class UserFactory {
      * @return \Docente
      */
     public function creaGestoreDaArray($row) {
-        $gestore = new Docente();
+        $gestore = new Gestore();
         $gestore->setId($row['gestori_id']);
         $gestore->setNome($row['gestori_nome']);
         $gestore->setCognome($row['gestori_cognome']);
@@ -747,7 +764,7 @@ class UserFactory {
         $gestore->setRuolo(User::Gestore);
         $gestore->setUsername($row['gestori_username']);
         $gestore->setPassword($row['gestori_password']);
-
+       
         $gestore->setPizzeria(PizzeriaFactory::instance()->creaDaArray($row));
         return $gestore;
     }
@@ -1012,7 +1029,8 @@ class UserFactory {
                 $row['gestori_username'], 
                 $row['gestori_password'], 
                 $row['pizzerie_id'], 
-                $row['dipartimenti_nome']);
+                $row['pizzerie_nome']);
+                
         if (!$bind) {
             error_log("[caricaGestoreDaStmt] impossibile" .
                     " effettuare il binding in output");
@@ -1097,6 +1115,37 @@ class UserFactory {
 
         return self::creaClienteDaArray($row);
     }
+    
+    
+    public function &getClienteDaId($cliente_id) {
+        $clienti = array();
+        $query = "select * from clienti where id = $cliente_id";
+        $mysqli = Db::getInstance()->connectDb();
+        if (!isset($mysqli)) {
+            error_log("[getListaClienti] impossibile inizializzare il database");
+
+            $mysqli->close();
+            return $clienti;
+        }
+        $result = $mysqli->query($query);
+        if ($mysqli->errno > 0) {
+
+            error_log("[getListaClienti] impossibile eseguire la query");
+
+            $mysqli->close();
+            return $clienti;
+        }
+
+        while ($row = $result->fetch_array()) {
+            $clienti[] = self::creaClienteDaArray($row);
+        }
+        $cliente = $clienti[0];
+        return $cliente;
+    }
+
+    
+    
+    
 
 }
 

@@ -143,6 +143,22 @@ class BaseController {
         $vd->setRightBarFile(basename(__DIR__) . '/../view/docente/rightBar.php');
         $vd->setContentFile(basename(__DIR__) . '/../view/docente/content.php');
     }
+    
+    /**
+     * Imposta la vista master.php per visualizzare la pagina di gestione
+     * del docente
+     * @param ViewDescriptor $vd il descrittore della vista
+     */
+    protected function showHomeGestore($vd) {
+        // mostro la home dei docenti
+        $vd->setTitolo("esAMMi - gestione gestore ");
+        $vd->setMenuFile(basename(__DIR__) . '/../view/gestore/menu.php');
+        $vd->setLogoFile(basename(__DIR__) . '/../view/gestore/logo.php');
+        $vd->setLeftBarFile(basename(__DIR__) . '/../view/gestore/leftBar.php');
+        $vd->setRightBarFile(basename(__DIR__) . '/../view/gestore/rightBar.php');
+        $vd->setContentFile(basename(__DIR__) . '/../view/gestore/content.php');
+        
+    }
 
     /**
      * Imposta la vista master.php per visualizzare la pagina di gestione
@@ -177,6 +193,9 @@ class BaseController {
 
             case User::Docente:
                 $this->showHomeDocente($vd);
+                break;
+            case User::Gestore:
+                $this->showHomeGestore($vd);
                 break;
 
             case User::Amministratore:

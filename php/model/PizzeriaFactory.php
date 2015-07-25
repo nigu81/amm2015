@@ -1,8 +1,6 @@
 <?php
-
 include_once 'Pizzeria.php';
 include_once 'Db.php';
-
 /**
  * Classe per creare oggetti di tipo Pizzeria
  *
@@ -69,13 +67,14 @@ class PizzeriaFactory {
      * Crea un pizzeria da una riga di DB
      * @param type $row
      */
-   /* public function creaDaArray($row){
+    public function creaDaArray($row){
         $pizzeria = new Pizzeria();
-        $pizzeria->setId($row['pizzeria_id']);
-        $pizzeria->setNome($row['pizzeria_nome']);
+        
+        $pizzeria->setId($row['pizzerie_id']);
+        $pizzeria->setNome($row['pizzerie_nome']);
         return $pizzeria;
     }
-    */
+    
     /**
      * Crea un oggetto di tipo Pizzeria a partire da una riga del DB
      * @param type $row
@@ -90,7 +89,8 @@ class PizzeriaFactory {
         return $pizzeria;
     }
     
+     
+    
    
 }
-
 ?>

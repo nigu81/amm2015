@@ -14,12 +14,13 @@ class Gestore extends User {
      * Il Dipartimento di afferenza
      * @var Dipartimento $dipartimento 
      */
+     private $id;
     private $pizzeria;
     /**
      * Descrizione dell'orario di ricevimento
      * @var string
      */
-    private $ricevimento;
+    //private $ricevimento;
 
     /**
      * Costruttore
@@ -45,6 +46,8 @@ class Gestore extends User {
     public function setPizzeria(Pizzeria $pizzeria) {
         $this->pizzeria = $pizzeria;
     }
+    
+   
 
 }
 
