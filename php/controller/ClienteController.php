@@ -205,10 +205,27 @@ class ClienteController extends BaseController {
                         
                         break;
                     case 'salva_ordine':
-                        /*$mysqli->commit();
+                    $mysqli = Db::getInstance()->connectDb();
+                        $mysqli->commit();
                         $mysqli->autocommit(true);
                         $mysqli->close();
                         $this->creaFeedbackUtente($msg, $vd, "Ordine salvato");
+                        $vd->setSottoPagina('default');
+                        $this->showHomeUtente($vd);
+                        break;
+                        /*
+                          registrare i dettagli 
+                          sulla tabella ordini_clienti
+                        */
+                        break;
+                     case 'annulla_ordine':
+                    $mysqli = Db::getInstance()->connectDb();
+                        $mysqli->rollback();
+                        $mysqli->autocommit(true);
+                        $mysqli->close();
+                        $this->creaFeedbackUtente($msg, $vd, "Ordine Annullato");
+                        $vd->setSottoPagina('default');
+                        
                         $this->showHomeUtente($vd);
                         break;
                         /*

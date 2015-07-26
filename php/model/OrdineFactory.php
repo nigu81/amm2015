@@ -177,7 +177,7 @@ public function cercaOrdinePerId($ordine_id,$pizzeria){
     
     private function modificaDB(Ordine $ordine, $query, &$request){
         $mysqli = Db::getInstance()->connectDb();
-        //$mysqli->autocommit(false);
+        $mysqli->autocommit(false);
         if (!isset($mysqli)) {
             error_log("[salva] impossibile inizializzare il database");
             return 0;
