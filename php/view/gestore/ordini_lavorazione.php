@@ -5,7 +5,7 @@
     <form method="post" action="gestore/dettaglio_ordine_da_lavorare<?= $vd->scriviToken('?') ?>">
         <label for="status">Numero Ordine</label>
         
-            <input type="text" name="ordine">
+            <input type="text" name="ordine_id">
         
         <br/>
         

@@ -58,24 +58,34 @@ class GestoreController extends BaseController {
                         break;
                     
                     case 'ordini_pizzeria':
-                        
                         $vd->setSottoPagina('ordini_pizzeria');
                         break;
                     case 'cerca_ordini':
                         $pizzeria = $user->getPizzeria()->getId();
-                        
-                        $ordini = OrdineFactory::instance()->cercaOrdiniPerPizzeria($request['status'], $pizzeria);
+                        $ordini = OrdineFactory::instance()->cercaOrdiniPerPizzeria($request['status'], $pizzeria);                  
                         $vd->setSottoPagina('ordini_pizzeria');
                         break;                 
                     case 'lavora_ordine':
-                        $vd->setSottoPagina('lavora_ordine');
+                         $vd->setSottoPagina('lavora_ordine');
+                        
                         break;
                     case 'dettaglio_ordine_da_lavorare':
-                        $ordini = OrdineFactory::instance()->cercaOrdinePerId($request['ordine']);
+                        $pizzeria = $user->getPizzeria()->getId();
                         
-                        $dettagli_ordine = DettagliOrdineFactory::instance()->dettagliOrdinePerOrdine($request['ordine']);
-                        $vd->setSottoPagina('dettaglio_ordine_da_lavorare');
+                        $ordini = OrdineFactory::instance()->cercaOrdinePerId($request['ordine_id'], $pizzeria);
+                        if (isset($ordini)){
+                            $dettagli_ordine = DettagliOrdineFactory::instance()->dettagliOrdinePerOrdine($request['ordine_id']);
+                            
+                            $vd->setSottoPagina('dettaglio_ordine_da_lavorare');
+                        } else {
+                            $msg[]="Ordine non presente per questa pizzeria";
+                            $this->creaFeedbackUtente($msg, $vd, "Ordine non presente per questa pizzeria");
+                        
+                            
+                            $vd->setSottoPagina('lavora_ordine');
+                        }
                         break;
+                    
                     // inserimento di una lista di appelli
                     case 'appelli':
                         $appelli = AppelloFactory::instance()->getAppelliPerDocente($user);
@@ -220,7 +230,7 @@ class GestoreController extends BaseController {
 
                     // gestione della richiesta ajax di filtro esami
                     case 'filtra_ordini':
-                    echo "STO FILTRANDO";
+                    
                         $vd->toggleJson();
                         $vd->setSottoPagina('el_ordini_json');
                         $errori = array();
@@ -265,6 +275,8 @@ class GestoreController extends BaseController {
                                 );
 
                         break;
+                    
+                    
 
                     default:
                         $vd->setSottoPagina('home');
@@ -319,7 +331,21 @@ class GestoreController extends BaseController {
                         $this->creaFeedbackUtente($msg, $vd, "Password aggiornata");
                         $this->showHomeUtente($vd);
                         break;
-
+                    case 'modifica_ordine':
+                        //$request['ordine_id'];
+                        //$request['ordine_status'];
+                       OrdineFactory::instance()->lavoraOrdine($request);
+                        $this->creaFeedbackUtente($msg, $vd, "Status ordine aggiornato");
+                
+                        $this->showHomeUtente($vd);
+                        break;
+                    case 'elimina_ordine':
+                        $request['ordine_id'];
+                        OrdineFactory::instance()->eliminaOrdine($request);
+                        $this->creaFeedbackUtente($msg, $vd, "Ordine Eliminato");
+                
+                        $this->showHomeUtente($vd);
+                        break;   
                     // richiesta modifica di un appello esistente,
                     // dobbiamo mostrare le informazioni
                     case 'a_modifica':
@@ -614,6 +640,7 @@ class GestoreController extends BaseController {
                         $this->creaFeedbackUtente($msg, $vd, "Lo implementiamo con il db, fai conto che abbia funzionato ;)");
                         $this->showHomeUtente($vd);
                         break;
+                    
 
                     // default
                     default:

@@ -101,7 +101,7 @@ class OrdineFactory {
         if (isset($row['status'])){
             $ordine->setStatus($row['status']);
         }
-        
+              
         if (isset($row['pizzeria'])){
             $ordine->setPizzeria($row['pizzeria']);    
         }
@@ -115,7 +115,7 @@ class OrdineFactory {
     }
 	
 	
-public function cercaOrdinePerId($ordine_id){
+public function cercaOrdinePerId($ordine_id,$pizzeria){
         $ordini = array();
         $query = "SELECT
                     ordini_clienti.ordine_id ordine, 
@@ -130,7 +130,7 @@ public function cercaOrdinePerId($ordine_id){
                     JOIN pizzerie ON ordini_clienti.pizzeria_id = pizzerie.id 
                     JOIN ordini ON ordini_clienti.ordine_id = ordini.id 
                     
-                    WHERE ordini.id = ?
+                    WHERE ordini.id = ? AND ordini.pizzeria_id = ?
                     GROUP BY ordini_clienti.ordine_id";
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
@@ -148,7 +148,7 @@ public function cercaOrdinePerId($ordine_id){
             return $ordini;
         }
         
-        if (!$stmt->bind_param('i', $ordine_id)) {
+        if (!$stmt->bind_param('ii', $ordine_id,$pizzeria)) {
             error_log("[cercaOrdinePerId] impossibile" .
                     " effettuare il binding in input");
             $mysqli->close();
@@ -158,11 +158,12 @@ public function cercaOrdinePerId($ordine_id){
         /*foreach($ordini as $pizze){
             DettagliOrdineFactory::caricaDettagliOrdine($pizze);
         }*/
-        if(count($ordini > 0)){
+        if(count($ordini) > 0){
             $mysqli->close();
             return $ordini[0];
         }else{
             $mysqli->close();
+            error_log("Ordine non trovato");
             return null;
         }
     }
@@ -176,6 +177,7 @@ public function cercaOrdinePerId($ordine_id){
     
     private function modificaDB(Ordine $ordine, $query, &$request){
         $mysqli = Db::getInstance()->connectDb();
+        //$mysqli->autocommit(false);
         if (!isset($mysqli)) {
             error_log("[salva] impossibile inizializzare il database");
             return 0;
@@ -189,8 +191,9 @@ public function cercaOrdinePerId($ordine_id){
             $mysqli->close();
             return 0;
         }
+        $value = $ordine->getData()->format('Y-m-d');
         if (!$stmt->bind_param('sii',                
-                $ordine->getData()->format('Y-m-d'), 
+                $value, 
                 $request['pizzeria_id'],
                 $request['cliente']
                 )) {
@@ -208,7 +211,7 @@ public function cercaOrdinePerId($ordine_id){
         
         $id_ultimo_ordine = $mysqli->insert_id;
         
-        $mysqli->close();
+        //$mysqli->close();
         return $id_ultimo_ordine;
     }
     
@@ -285,6 +288,43 @@ public function cercaOrdinePerId($ordine_id){
         }
         $stmt->close();
         return $ordini;
+    }
+    
+    public function lavoraOrdine(&$request){
+        $mysqli = Db::getInstance()->connectDb();
+        if (!isset($mysqli)) {
+            error_log("[salva] impossibile inizializzare il database");
+            return 0;
+        }
+        $id_ordine = $request['ordine_id'];
+        $status_ordine = $request['ordine_status'];
+        $query = "update ordini
+                  set
+                  status = $status_ordine
+                  where id=$id_ordine";
+                  
+        $mysqli->query($query);
+        $mysqli->close();
+        
+    }
+    
+    public function eliminaOrdine(&$request){
+        $mysqli = Db::getInstance()->connectDb();
+        if (!isset($mysqli)) {
+            error_log("[salva] impossibile inizializzare il database");
+            return 0;
+        }
+        $id_ordine = $request['ordine_id'];
+        $query = "delete from ordini
+                  where id = $id_ordine";
+                  
+        $mysqli->query($query);
+        $query = "delete from ordini_clienti
+                  where ordine_id = $id_ordine";
+                  
+        $mysqli->query($query);
+        $mysqli->close();
+        
     }
     
     

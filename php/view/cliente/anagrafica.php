@@ -10,7 +10,7 @@
 <div class="input-form">
     <h3>Indirizzo</h3>
 
-
+<form method="post" action="cliente/anagrafica<?= $vd->scriviToken('?')?>">
         <input type="hidden" name="cmd" value="indirizzo"/>
         <label for="via">Via o Piazza:</label>
         <input type="text" name="via" id="via" value="<?= $user->getVia() ?>"/>
@@ -33,7 +33,7 @@
 <div class="input-form">
     <h3>Email</h3>
 
-
+<form method="post" action="cliente/anagrafica<?= $vd->scriviToken('?')?>">
         <input type="hidden" name="cmd" value="email"/>
         <label for="email">Email:</label>
         <input type="text" name="email" id="email"value="<?= $user->getEmail() ?>"/>
@@ -44,7 +44,7 @@
 
 <div class="input-form">
     <h3>Password</h3>
-
+<form method="post" action="cliente/anagrafica<?= $vd->scriviToken('?')?>">
         <input type="hidden" name="cmd" value="password"/>
         <label for="pass1">Nuova Password:</label>
         <input type="password" name="pass1" id="pass1"/>

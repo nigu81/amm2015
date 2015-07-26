@@ -6,10 +6,6 @@
     <table>
         <thead>
             <tr>
-           <!--     <th class="esami-col-large">Ordine</th>
-                <th class="esami-col-small">Cliente</th>
-                <th class="esami-col-large">Pizzeria</th>
-                <th class="esami-col-large">Pizza</th> -->
                 <th class="esami-col-large">NomePizza</th>
                 <th class="esami-col-large">IngredientiPizza</th>
                 <th class="esami-col-small">Qta</th>
@@ -49,7 +45,7 @@
     <p> Ordine Vuoto </p>
 <?php } ?>
 <div class="btn-group">
-            <button type="submit" name="cmd" value="a_nuovo">Salva</button>
-            <button type="submit" name="cmd" value="a_annulla">Annulla</button>
+            <button type="submit" name="cmd" value="salva_ordine">Salva</button>
+            <button type="submit" name="cmd" value="annulla_ordine">Annulla</button>
         </div>
 

@@ -121,7 +121,9 @@ class DettagliOrdineFactory {
     
     public function nuovo(DettagliOrdine $dettaglio_ordine, &$request){
         $query = "insert into ordini_clienti (ordine_id, pizzeria_id, cliente_id, pizza_id, qta)
-                  values (?, ?, ?,?,?)";
+                  values (?, ?, ?,?,?)
+                  ON DUPLICATE KEY UPDATE qta = ?";
+        
         return $this->modificaDB($dettaglio_ordine, $query, $request);
     }	
     
@@ -142,11 +144,12 @@ class DettagliOrdineFactory {
             return 0;
         }
 
-        if (!$stmt->bind_param('iiiii', 
+        if (!$stmt->bind_param('iiiiii', 
             $request['ordine_id'],
             $request['pizzeria_id'],
                 $request['cliente_id'],
                 $request['pizza_id'],
+                $request['qta'],
                 $request['qta']
                 )) {
             error_log("[modificaDB] impossibile" .
@@ -156,11 +159,14 @@ class DettagliOrdineFactory {
         }
 
         if (!$stmt->execute()) {
+            
             error_log("[modificaDB] impossibile" .
                     " eseguire lo statement");
+                    
             $mysqli->close();
             return 0;
         }
+        
 
         $mysqli->close();
 
@@ -181,6 +187,9 @@ class DettagliOrdineFactory {
         $mysqli->close();
         
     }
+    
+    
+    
     
     
     

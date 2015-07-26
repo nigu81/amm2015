@@ -14,7 +14,7 @@
         </select>
         <br/>
         
-        <button id="cerca" type="submit" name="cmd" value="cerca_ordini">Cerca</button>
+        <button id="cerca" type="submit" >Cerca</button>
     </form>
 </div>
 

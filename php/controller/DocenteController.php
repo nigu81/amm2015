@@ -632,6 +632,7 @@ class DocenteController extends BaseController {
             $data = DateTime::createFromFormat("d/m/Y", $request['data']);
             if (isset($data) && $data != false) {
                 $mod_appello->setData($data);
+                return null;
             } else {
                 $msg[] = "<li>La data specificata non &egrave; corretta</li>";
             }

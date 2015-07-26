@@ -5,10 +5,6 @@
     <table>
         <thead>
             <tr>
-                <!--<th class="esami-col-large">Ordine</th>
-                <th class="esami-col-small">Cliente</th>
-                <th class="esami-col-large">Pizzeria</th>
-                <th class="esami-col-large">Pizza</th>-->
                 <th class="esami-col-large">NomePizza</th>
                 <th class="esami-col-large">IngredientiPizza</th>
                 <th class="esami-col-small">Qta</th>

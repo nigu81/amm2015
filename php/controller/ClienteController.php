@@ -87,9 +87,8 @@ class ClienteController extends BaseController {
                         //$ordini = OrdineFactory::instance()->ordiniPerCliente($user);
                         $pizzerie = PizzeriaFactory::instance()->elencoPizzerie();
                         //$pizze = PizzaFactory::instance()->elencoPizze();
-                        
-                        
-                        $vd->setSottoPagina('crea_ordine');
+                         $vd->setSottoPagina('crea_ordine');
+                         $this->showHomeUtente($vd);
                         break;
                     case 'crea_ordine_items':
                         //$ordini = OrdineFactory::instance()->ordiniPerCliente($user);
@@ -100,6 +99,7 @@ class ClienteController extends BaseController {
                         $dettagli_ordine = DettagliOrdineFactory::instance()->dettagliOrdinePerOrdine($id_ultimo_ordine);
 
                         $vd->setSottoPagina('crea_ordine_items');
+                         //   $this->showHomeUtente($vd);
                         break;
                     
                         
@@ -153,39 +153,45 @@ class ClienteController extends BaseController {
                         $this->showHomeStudente($vd);
                         break;
                     case 'nuovo_ordine':
+                        
+                        
                         $msg = array();
                         $nuovo = new Ordine();
                        // $nuovo->setId(-1);
                         $this->updateOrdine($nuovo, $request, $msg);
-                        $this->creaFeedbackUtente($msg, $vd, "Ordine creato");
-                        $id_ultimo_ordine = OrdineFactory::instance()->nuovo($nuovo, $request );
+                        
                         if (count($msg) == 0) {
+                            
+                            $id_ultimo_ordine = OrdineFactory::instance()->nuovo($nuovo, $request );
                             $pizze = PizzaFactory::instance()->elencoPizze();
                             $dettagli_ordine = DettagliOrdineFactory::instance()->dettagliOrdinePerOrdine($id_ultimo_ordine);
+                            //$this->creaFeedbackUtente($msg, $vd, "Ordine creato");
                             $vd->setSottoPagina('crea_ordine_items');
                                
-                        }
+                        } 
                         
-                        //$ordini = OrdineFactory::instance()->OrdiniPerCliente($user);
+                        $this->creaFeedbackUtente($msg, $vd, "Ordine creato");
                         $this->showHomeUtente($vd);
                         break;
                     
                     case 'aggiungi_item':
-                        if ($request['qta']<1 || (!isset($request['qta']))){
-                            echo "qta inserita non valida";
-                            break;
-                        }
-                        
                         $msg = array();
-                        $nuovo_dettaglio = new DettagliOrdine();
-                        DettagliOrdineFactory::instance()->nuovo($nuovo_dettaglio, $request );
-                        $pizze = PizzaFactory::instance()->elencoPizze();
-                       
-                        $dettagli_ordine = DettagliOrdineFactory::instance()->dettagliOrdinePerOrdine($request['ordine_id']);
-                        $id_ultimo_ordine=$request['ordine_id'];
-                        $vd->setSottoPagina('crea_ordine_items');
+                        if ($request['qta']<1 || (!isset($request['qta']))){
+                            $msg[] = '<li>qta inserita non valida</li>';
+                            //$this->showHomeUtente($vd);
+                        } else {
+                            $nuovo_dettaglio = new DettagliOrdine();
+                            DettagliOrdineFactory::instance()->nuovo($nuovo_dettaglio, $request);
+                            $pizze = PizzaFactory::instance()->elencoPizze();
+                            $dettagli_ordine = DettagliOrdineFactory::instance()->dettagliOrdinePerOrdine($request['ordine_id']);
+                            $id_ultimo_ordine=$request['ordine_id'];
+                            
+                            $this->showHomeUtente($vd);
+                            
+                        }
+                        $this->creaFeedbackUtente($msg, $vd, "Ordine aggiornato");
                         $this->showHomeUtente($vd);
-                        
+  
                         break;
                     case 'elimina_item':
                         $nuovo_dettaglio = new DettagliOrdine();
@@ -199,6 +205,12 @@ class ClienteController extends BaseController {
                         
                         break;
                     case 'salva_ordine':
+                        /*$mysqli->commit();
+                        $mysqli->autocommit(true);
+                        $mysqli->close();
+                        $this->creaFeedbackUtente($msg, $vd, "Ordine salvato");
+                        $this->showHomeUtente($vd);
+                        break;
                         /*
                           registrare i dettagli 
                           sulla tabella ordini_clienti
@@ -234,25 +246,37 @@ private function getDettaglioOrdine(&$request, &$msg) {
     }
     
     private function updateOrdine($mod_ordine, &$request, &$msg) {
-        
-        
+       
         if (isset($request['data'])) {
+            
             $data = DateTime::createFromFormat("d/m/Y", $request['data']);
-            if (isset($data) && $data != false) {
+            
+            if( DateTime::getLastErrors()['warning_count'] > 0 ){
+              $msg[] = "<li>La data specificata non &egrave; corretta</li>";
+            }   
+            else {
                 $mod_ordine->setData($data);
+            }
+                
+               // return null;
                 //echo $mod_ordine->getData();
             } else {
-                $msg[] = "<li>La data specificata non &egrave; corretta</li>";
-            }
+                $msg[] = "<li>Non hai specificato la data</li>";
+               
+               
+              // $vd->setSottoPagina('crea_ordine'); 
+            
         }
-        if (isset($request['pizzeria'])) {
-         //   if (!
-                $mod_ordine->setPizzeria($request['pizzeria']);
-                //echo $mod_ordine->getPizzeria();
-         //       ) {
-         //       $msg[] = "<li>La capienza specificata non &egrave; corretta</li>";
-        //    }
+        
+        
+        if (isset($request['pizzeria_id'])) {
+         
+                $mod_ordine->setPizzeria($request['pizzeria_id']);
+     
+        }else {
+                $msg[] = "<li>Devi selezionare una pizzeria</li>";
         }
+        
         if (isset($request['cliente'])) {
          //   if (!
                 $mod_ordine->setCliente($request['cliente']);
