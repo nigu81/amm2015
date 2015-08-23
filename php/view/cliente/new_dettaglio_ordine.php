@@ -48,4 +48,4 @@
             <button type="submit" name="cmd" value="salva_ordine">Salva</button>
             <button type="submit" name="cmd" value="annulla_ordine">Annulla</button>
         </div>
-
+</form>
