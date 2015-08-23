@@ -25,8 +25,10 @@ if (!$vd->isJson()) {
             <meta http-equiv="content-type" content="text/html; charset=utf-8" />
             <title><?= $vd->getTitolo() ?></title>
             <base href="<?= Settings::getApplicationPath() ?>php/"/>
-            <meta name="keywords" content="AMM esami docente" />
-            <meta name="description" content="Una pagina per gestire le funzioni dei docenti" />
+            <meta name="keywords" content="gnAMM gestione ordini pizza" />
+            <meta name="description" content="Una pagina per gestire gli ordini di pizza" />
+            <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+            <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
             <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
             <link href="../css/responsive.css" rel="stylesheet" type="text/css" media="screen" />
             <?php
@@ -46,25 +48,25 @@ if (!$vd->isJson()) {
                         require "$logo";
                         ?>
                         <ul>
-                            <li id="facebook"><a href="www.facebook.com">facebook</a></li>
-                            <li id="twitter"><a href="https://twitter.com/">twitter</a></li>
-                            <li id="linkedin"><a href="http://www.linkedin.com/">linkedin</a></li>
+                            <li id="linkedin"><a href="https://it.linkedin.com/in/nicolafrongia">linkedin</a></li>
                         </ul>
                     </div>
                     <!--  header -->
                     <div id="header">
                         <div id="logo">
 
-                            <h1>EsAMMi</h1>
+                            <h1>gnAMM</h1>
 
                         </div>
 
                         <!-- select per la versione del menu mobile -->
-                        <select class="menu">
+                        <select class="menu" onChange="window.location.href=this.value">
+                            
                             <?php
-                            $mini_menu = $vd->getMenuFile();
+                            $mini_menu = $vd->getMiniMenuFile();
                             require "$mini_menu";
                             ?>
+                            
 
                         </select>
                         <!-- tabs -->
@@ -90,7 +92,7 @@ if (!$vd->isJson()) {
                             <h2 class="icon-title">Link esterni</h2>
                             <ul>
                                 <li><a href="http://www.unica.it/">Universit&agrave; di Cagliari</a></li>
-                                <li><a href="http://www.unica.it/">Facolt&agrave;</a></li>
+                                <li><a href="http://informatica.unica.it/">Facolt&agrave; di Informatica</a></li>
 
                             </ul>
                         </li>
@@ -149,20 +151,20 @@ if (!$vd->isJson()) {
                     <div id="footer">
                         <p>
 
-                            Applicazione d'esempio per l'esame di Amministrazione di Sistema
+                            Applicazione per ordinazioni online di pizze da asporto
 
                         </p>
 
 
                     </div>
-                    <div class="validator">
+                 <!--   <div class="validator">
                         <p>
                             <a href="http://validator.w3.org/check/referer" class="xhtml" title="Questa pagina contiene HTML valido">
                                 <abbr title="eXtensible HyperText Markup Language">HTML</abbr> Valido</a>
                             <a href="http://jigsaw.w3.org/css-validator/check/referer" class="css" title="Questa pagina ha CSS validi">
                                 <abbr title="Cascading Style Sheets">CSS</abbr> Valido</a>
                         </p>
-                    </div>
+                    </div> -->
                 </footer>
             </div>
         </body>

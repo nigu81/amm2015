@@ -2,8 +2,6 @@
 
 
 include_once 'controller/BaseController.php';
-include_once 'controller/StudenteController.php';
-include_once 'controller/DocenteController.php';
 include_once 'controller/ClienteController.php';
 include_once 'controller/GestoreController.php';
 
@@ -34,18 +32,7 @@ class FrontController {
                     $controller->handleInput($request);
                     break;
 
-                // studente
-                case 'studente':
-                    // la pagina degli studenti e' accessibile solo agli studenti
-                    // agli studenti ed agli amminstratori
-                    // il controllo viene fatto dal controller apposito
-                    $controller = new StudenteController();
-                    if (isset($_SESSION[BaseController::role]) &&
-                        $_SESSION[BaseController::role] != User::Studente) {
-                        self::write403();
-                    }
-                    $controller->handleInput($request);
-                    break;
+                
                     
                 // studente
                 case 'cliente':
@@ -71,19 +58,7 @@ class FrontController {
                     $controller->handleInput($request);
                     break;
                 // docente
-                case 'docente':
-
-                    // la pagina dei docenti e' accessibile solo
-                    // ai docenti ed agli amminstratori
-                    // il controllo viene fatto dal controller apposito
-                    $controller = new DocenteController();
-                    if (isset($_SESSION[BaseController::role]) &&
-                        $_SESSION[BaseController::role] != User::Docente)  {
-                        self::write403();
-                    }
-                    $controller->handleInput($request);
-                    break;
-
+               
                 default:
                     self::write404();
                     break;

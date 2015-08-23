@@ -1,7 +1,7 @@
-<h2 class="icon-title" id="h-cerca">Elenco ordini</h2>
+<h2 class="icon-title" id="h-pizza-box-mini">Scelta ordine</h2>
 
 <div class="input-form">
-    <h3>Filtro</h3>
+    
     <form method="post" action="gestore/dettaglio_ordine_da_lavorare<?= $vd->scriviToken('?') ?>">
         <label for="status">Numero Ordine</label>
         

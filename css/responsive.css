@@ -1,19 +1,32 @@
 /* impostazioni principali del layout */
 
 body{
-    background-color: #e4e4e4;
-    font: 13px/20px "Open Sans", Arial, sans-serif;
+    background-color: #332020;
+    font-family: "Roboto", Arial, sans-serif;;
+    font-size: 14px;
+    
 }
 
 #page{
+    border-radius: 10px;
     background-color: white;
 }
 
-#header, #footer{
-    background-color: #1c345a;
+#header{
+    border-radius: 10px 10px 0px 0px;
+    background-color: #1caa5a;
     color: white;
 
 }
+
+#footer{
+    border-radius: 0px 0px 10px 10px;
+    background-color: #1caa5a;
+    color: white;
+
+}
+
+
 
 #footer p{
     display: block; 
@@ -40,30 +53,33 @@ h2, h3, h4, h5, h6 {
 
 
 a:link{
-    text-decoration: underline;
+    text-decoration: none;
     color: #9e1616;
 }
 
 a:visited{
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     color: #9e1616;
 }
 
 a:hover{
-    font-weight: bold;
+    /*font-weight: bold;*/
+    color: #00aa00;
 
 }
 
 input{
-    border: 1px solid #1c345a;
+    border-radius: 2px;
+    height: 1.5em;
+    border: 1px solid #1c555a;
 }
 
 input[type=submit], button{
     color: #ffffff;
-    background-color: #1c345a;
+    background-color: #1c555a;
     height: 2em;
     font-weight: bold;
-    border-radius: 1em;
+    border-radius: 2px;
     border: 1px solid #1c345a;
     min-width: 100px;
     margin-bottom: 10px;
@@ -202,13 +218,19 @@ tr.alt-row, tr.alt-row td{
 }
 
 #sidebar2 ol  {
-    padding-left: 20px;
+    padding-left: 10px;
+}
+
+#sidebar2 li  {
+    padding-top: 5px;
+    
 }
 
 
 
 #sidebar1 ul, #sidebar2 ul{
     padding-left: 10px;
+    padding-top: 10px;
     margin-top: 0px;
     margin-left: 0px;
 }
@@ -286,6 +308,8 @@ tr.alt-row, tr.alt-row td{
     background: url('../images/ok.png') no-repeat left top;
     min-height: 32px;
 }
+
+
 
 /* gestione dei dispositivi */
 
@@ -368,20 +392,33 @@ tr.alt-row, tr.alt-row td{
     select.menu {
         display: none;
     }
+    
 
     #header{
         clear: both;
     }
 
-    #header, #footer{
+    #header{
         height: 100px;
         position: relative;
         padding-left: 20px;
         padding-right: 20px;
         width: 900px;
         left: -20px;
-        border-bottom: 10px solid #9e1616;
-        box-shadow: 0 0 10px rgba(0,0,0,.2);
+        border-bottom: 10px solid #005555;
+       box-shadow: 0 0 10px rgba(0,0,0,.2);
+
+    }
+    
+    #footer{
+        height: 50px;
+        position: relative;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 900px;
+        left: -20px;
+        border-top: 10px solid #005555;
+         box-shadow: 0 0 10px rgba(0,0,0,.2);
 
     }
 
@@ -438,33 +475,60 @@ tr.alt-row, tr.alt-row td{
         background: url('../images/logout.png') no-repeat left center;
     }
 
-    #header:before, #footer:before {
+    
+    
+    #header:before{
         left: 0;
         border-width: 20px 0 0 20px;
         content: "";
         position: absolute;
         display: block;
         border-style: solid;
-        border-color: #1c345a transparent transparent transparent;
+        border-color: #004040 transparent transparent transparent;
         margin-top: 110px;
 
     }
 
-    #header:after, #footer:after {
+    #header:after {
         right: 0;
         border-width: 20px 20px 0px 0px;
         content: "";
         position: absolute;
         display: block;
         border-style: solid;
-        border-color: #1c345a transparent transparent transparent;
+        border-color: #004040 transparent transparent transparent;
         margin-top: 110px;
+
+    }
+    
+    #footer:before{
+        left: 0;
+        border-width: 20px 20px 00px 00px;
+        content: "";
+        position: absolute;
+        display: block;
+        border-style: solid;
+        border-color: transparent#004040  transparent transparent;
+        margin-top: -30px;
+
+    }
+    
+    
+    #footer:after {
+        right: -20px;
+        border-width: 20px 20px 0px 20px;
+        content: "";
+        position: absolute;
+        display: block;
+        border-style: solid;
+        border-color: transparent  transparent transparent#004040 ;
+        margin-top: -30px;
 
     }
 
 
     div#logo h1 {
-        background-image: url('../images/logo.jpg');
+        background-image: url('../images/logo_pizza.png');
         background-repeat: no-repeat;
         background-position: center left;
         height: 100px;
@@ -474,6 +538,8 @@ tr.alt-row, tr.alt-row td{
         margin-bottom: 0px;
         line-height: 100px;
         color: #ffffff;
+        font-family: 'Lobster', serif;
+        font-size: 48px;
         display: block;
     }
 
@@ -482,24 +548,44 @@ tr.alt-row, tr.alt-row td{
     }
 
     #categories h2{
-        background-image: url('../images/navigazione-mini.png');
+        background-image: url('../images/marker.png');
     }
 
     #external h2{
-        background-image: url('../images/ext-mini.png');
+        background-image: url('../images/rj45-xxl.png');
 
     }
 
     #h-personali{
         background-image: url('../images/anagrafica-mini.png');
     }
+    
+    #h-personali-gestore{
+        background-image: url('../images/pizzaiolo-mini.jpg');
+    }
+    
+    #h-personali-user{
+        background-image: url('../images/user-mini.png');
+    }
 
     #h-home{
-        background-image: url('../images/home-mini.png');
+        background-image: url('../images/desk.png');
     }
 
     #h-esami{
         background-image: url('../images/libretto-mini.png')
+    }
+    
+    #h-dettaglio{
+        background-image: url('../images/notepad-mini.png')
+    }
+    
+    #h-ordini{
+        background-image: url('../images/checklist-mini.jpg')
+    }
+    
+    #h-ordini-cerca{
+        background-image: url('../images/filtro-mini.png')
     }
 
     #h-iscrizione{
@@ -509,13 +595,19 @@ tr.alt-row, tr.alt-row td{
     #h-cerca{
         background-image: url('../images/cerca-mini.png')
     }
+    
+     #h-pizza-box-mini{
+        background-image: url('../images/pizza-boxes-mini.jpg')
+    }
+    
+   
 
     #h-dip{
         background-image: url('../images/exec-mini.png')
     }
 
     #sidebar2 h2{
-        background-image: url('../images/help-mini.png');
+        background-image: url('../images/monitor.png');
     }
 
     #pnl-anagrafica{
@@ -524,26 +616,36 @@ tr.alt-row, tr.alt-row td{
 
     }
 
-    #pnl-anagrafica-docenti{
-        background-image: url('../images/anagrafica.png');
+
+    #pnl-anagrafica-clienti{
+        background-image: url('../images/user.png');
+        background-repeat: no-repeat;
+
+    }
+    
+    #pnl-anagrafica-gestore{
+        background-image: url('../images/pizzaiolo.jpg');
         background-repeat: no-repeat;
 
     }
 
-    #pnl-anagrafica-studenti{
-        background-image: url('../images/anagrafica.png');
+    
+    #pnl-ordini{
+        background-image: url('../images/checklist.jpg');
         background-repeat: no-repeat;
 
     }
 
-    #pnl-libretto{
-        background-image: url('../images/libretto.png');
+
+    
+    #pnl-pizza-boxes{
+        background-image: url('../images/pizza-boxes.jpg');
         background-repeat: no-repeat;
 
     }
-
-    #pnl-iscrizione{
-        background-image: url('../images/iscrizione.png');
+    
+    #pnl-crea_ordine{
+        background-image: url('../images/notepad.png');
         background-repeat: no-repeat;
 
     }
@@ -582,9 +684,9 @@ tr.alt-row, tr.alt-row td{
     }
 }
 
-@media only screen and (min-width: 600px) and (max-width: 1024px){
+@media only screen and (min-width: 600px) and (max-width: 1023px){
     body{
-        font: 18px/20px "Open Sans", Arial, sans-serif;
+        font-family: 18px/20px "Roboto",  Arial, sans-serif;;
     }
     #header, footer{
         padding: 10px;
@@ -592,18 +694,20 @@ tr.alt-row, tr.alt-row td{
         position: relative;
         padding-left: 20px;
         padding-right: 20px;
-        border-bottom: 10px solid #9e1616;
+        border-bottom: 10px solid #004040;
         margin: 0px;
-        background-color: #1c345a;
+        background-color: #1caa5a;
     } 
 
     #sidebar1 {
         float: left;
         width: 200px;
-        padding-left: 5px;
+        padding-left: 10px;
         padding-right: 10px;
 
     }
+    
+    
 
     #sidebar1 li {
         margin-bottom: 10px;
@@ -613,7 +717,7 @@ tr.alt-row, tr.alt-row td{
         float: left;
         clear:both;
         width: 200px;
-        padding-left: 5px;
+        padding-left: 15px;
         padding-right: 10px;
     }
 
@@ -629,6 +733,7 @@ tr.alt-row, tr.alt-row td{
     }
 
     #logo{
+        font-family: "Lobster", serif;
         position: absolute;
     }
 
@@ -658,9 +763,9 @@ tr.alt-row, tr.alt-row td{
         display: none;
     }
 
-    .social{
+    /*.social{
         display: none;
-    }
+    }*/
 
     #footer p{
         text-align: center;
@@ -681,41 +786,46 @@ tr.alt-row, tr.alt-row td{
         color: #ffffff;
         display: block;
     }
+    
+       #pnl-anagrafica-clienti{
+        background-image: url('../images/user.png');
+        background-repeat: no-repeat;
+
+    }
+    
+    #pnl-anagrafica-gestore{
+        background-image: url('../images/pizzaiolo.jpg');
+        background-repeat: no-repeat;
+
+    }
+
+    
+    #pnl-ordini{
+        background-image: url('../images/checklist.jpg');
+        background-repeat: no-repeat;
+
+    }
+
+
+    
+    #pnl-pizza-boxes{
+        background-image: url('../images/pizza-boxes.jpg');
+        background-repeat: no-repeat;
+
+    }
+    
+    #pnl-crea_ordine{
+        background-image: url('../images/notepad.png');
+        background-repeat: no-repeat;
+
+    }
 
     #pnl-anagrafica{
         background-image: url('../images/anagrafica.png');
         background-repeat: no-repeat;
     }
 
-    #pnl-anagrafica-docenti{
-        background-image: url('../images/anagrafica.png');
-        background-repeat: no-repeat;
-    }
-
-    #pnl-anagrafica-studenti{
-        background-image: url('../images/anagrafica.png');
-        background-repeat: no-repeat;
-    }
-
-    #pnl-libretto{
-        background-image: url('../images/libretto.png');
-        background-repeat: no-repeat;
-    }
-
-    #pnl-iscrizione{
-        background-image: url('../images/iscrizione.png');
-        background-repeat: no-repeat;
-    }
-
-    #pnl-cerca{
-        background-image: url('../images/cerca.png');
-        background-repeat: no-repeat;
-    }
-
-    #pnl-dipartimenti{
-        background-image: url('../images/exec.png');
-        background-repeat: no-repeat;
-    }
+    
 
     .panel li{
         display: block;
@@ -743,9 +853,9 @@ tr.alt-row, tr.alt-row td{
     }
 }
 
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 599px){
     body{
-        font: 18px/20px "Open Sans", Arial, sans-serif;
+        font: 18px/20px "Roboto", Arial, sans-serif;
     }
     #header, footer{
         padding: 10px;
@@ -753,9 +863,9 @@ tr.alt-row, tr.alt-row td{
         position: relative;
         padding-left: 20px;
         padding-right: 20px;
-        border-bottom: 10px solid #9e1616;
+        border-bottom: 10px solid #1c555a;
         margin: 0px;
-        background-color: #1c345a;
+        background-color: #1caa5a;
     } 
 
     #sidebar1 {
@@ -778,6 +888,7 @@ tr.alt-row, tr.alt-row td{
     }
 
     #logo{
+        font-family: "Lobster", serif;
         text-align: center;
     }
 
@@ -790,9 +901,9 @@ tr.alt-row, tr.alt-row td{
         width: 100%;
     }
 
-    .social{
+    /*.social{
         display: none;
-    }
+    }*/
 
     #footer p{
         text-align: center;

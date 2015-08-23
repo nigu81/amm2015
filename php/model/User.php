@@ -5,16 +5,6 @@
  */
 class User {
 
-    /**
-     * Costante che definisce il ruolo docente
-     */
-    const Docente = 1;
-    
-    /**
-     * Costante che definisce il ruolo studente
-     */
-
-    const Studente = 2;
     
     /**
      * Costante che definisce il ruolo cliente
@@ -214,9 +204,6 @@ class User {
      */
     public function setRuolo($ruolo) {
         switch ($ruolo) {
-            case self::Docente:
-
-            case self::Studente:
             
             case self::Gestore:
 

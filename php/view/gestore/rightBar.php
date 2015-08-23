@@ -20,49 +20,32 @@ switch ($vd->getSottoPagina()) {
         </ul>
         <?php break; ?>
 
-    <?php case 'appelli': ?>
+    <?php case 'ordini_pizzeria': ?>
         <p>
-            In questa sezione visualizzare i tuoi appelli d'esame.
-            In particolare:
+            In questa sezione è possibile visualizzare gli ordini della tua pizzeria attraverso il filtro del loro status.
+           
         </p>
-        <ul>
-            <li>
-                Puoi crearne uno nuovo premendo il pulsante <em>Nuovo</em>.
-            </li>
-            <li>
-                Puoi modificarne uno esistente premendo il pulsante <em>Modifica</em>, 
-                identificabile dall'icona matita <img  src="../images/edit-action.png" alt="icona modifica">
-            </li>
-            <li>
-                Puoi eliminarne uno esistente premendo il pulsante <em>Elimina</em>, 
-                identificabile dall'icona cestino <img  src="../images/delete-action.png" alt="icona elimina">
-            </li>
-        </ul>
-        <p>Per l'inserimento e la modifica &egrave; necessario specificare
-            solo l'insegnamento, la data ed i posti disponibili. 
-        </p>
+        
         <?php break; ?>
 
-    <?php case 'reg_esami': ?>
+    <?php case 'lavora_ordine': ?>
+    <?php case 'dettaglio_ordine_da_lavorare': ?>
         <p>
-            In questa sezione puoi registrare un esame, inserendo i seguenti 
-            dati
+            In questa sezione e' possibile inserire il numero di un ordine per poterlo lavorare
         </p>
-        <ul>
-            <li>Insegnamento</li>
-            <li>Lista dei docenti in commissione</li>
-            <li>Matricola dello studente</li>
-            <li>Voto</li>
-        </ul>
+        
         <p>
-            Viene inoltre mostrato l'elenco degli esami registrati in data odierna per
-            l'insegnamento selezionato.
+            Un ordine <strong>in attesa </strong>puo' passare ad essere in lavorazione (o eliminato)
 
         </p>
         <p>
-            &Egrave; possibile eliminare la registrazione di un esame
-            tramite il pulsante  <em>Elimina</em>, 
-            identificabile dall'icona cestino <img  src="../images/delete-action.png" alt="icona elimina">
+           Un ordine <strong>in preparazione </strong>puo' passare ad essere in consegna (o eliminato)
+        </p>
+        <p>
+           Un ordine <strong>in consegna </strong>puo' passare ad essere consegnato (o eliminato)
+        </p>
+        <p>
+           Un ordine <strong>consegnato</strong> puo' essere eliminato
         </p>
         <?php break; ?>
     <?php case 'el_esami': ?>
@@ -87,7 +70,7 @@ switch ($vd->getSottoPagina()) {
         ?>
         <p>
             Seleziona una delle  seguentifunzionalit&agrave; disponibili per 
-            la gestione dei tuoi insegnamenti:
+            la gestione degli ordini della tua pizzeria:
         </p>
         <ol>
             <li>
@@ -95,15 +78,12 @@ switch ($vd->getSottoPagina()) {
                 anagrafici e la tua password.
             </li>
             <li>
-                <strong>Appelli</strong> per visualizzare e/o creare appelli di esame
-                per i tuoi insegnamenti.
+                <strong>Elenco Ordini</strong> per visualizzare l'elenco degli ordini della tua pizzeria.
             </li>
             <li>
-                <strong>Esami</strong> per registrare gli statini di esame.
+                <strong>Lavora Ordine</strong> per lavorare un ordine.
             </li>
-            <li>
-                <strong>Elenco Esami</strong> per visualizzare gli statini di esame.
-            </li>
+            
         </ol>
         <?php break; ?>
 <?php } ?>

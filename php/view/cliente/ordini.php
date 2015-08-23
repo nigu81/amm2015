@@ -1,4 +1,4 @@
-<h2 class="icon-title" id="h-esami">Ordini</h2>
+<h2 class="icon-title" id="h-ordini">Ordini</h2>
 <ul class="none">
     <li><strong>Nome:</strong> <?= $user->getNome() ?></li>
     <li><strong>Cognome:</strong> <?= $user->getCognome() ?></li>

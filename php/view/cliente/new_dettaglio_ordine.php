@@ -1,4 +1,4 @@
-<h2 class="icon-title" id="h-esami">Dettaglio Ordine </h2>
+<h2 class="icon-title" id="h-dettaglio">Dettaglio Ordine </h2>
 
 
 <?php if (count($dettagli_ordine) > 0) { ?>
@@ -27,7 +27,7 @@
                      <td><?= $dettaglio_ordine->getNomePizza() ?></td>
                       <td><?= $dettaglio_ordine->getIngredientiPizza() ?></td>
                     <td><?= $dettaglio_ordine->getQta() ?>
-                    <td><?=$sub = $this->calcolaPrezzo($dettaglio_ordine->getPizzaId(), $dettaglio_ordine->getQta(),$dettaglio_ordine->getOrdineId(),$totale) ?></td>
+                    <td><?=$sub = $this->calcolaPrezzo($dettaglio_ordine->getPizzaId(), $dettaglio_ordine->getQta(),$dettaglio_ordine->getOrdineId(),$totale) ?></td>                   
                     </td>
                     <td><button type="submit">Cancella</button></td>
                 </tr>
@@ -39,7 +39,7 @@
             ?>
         </tbody>
     </table>
-    <?php echo "Totale ordine: ".$totale;?>
+    <?php echo "Totale ordine: ".number_format((float)$totale, 2, '.', '')." euro";?>
     
 <?php } else { ?>
     <p> Ordine Vuoto </p>

@@ -33,6 +33,7 @@ class ViewDescriptor {
      * @var string 
      */
     private $menu_file;
+    private $mini_menu_file;
 
     /**
      * File che include la definizione HTML della sidebar sinistra
@@ -146,6 +147,10 @@ class ViewDescriptor {
     public function getMenuFile() {
         return $this->menu_file;
     }
+    
+     public function getMiniMenuFile() {
+        return $this->mini_menu_file;
+    }
 
     /**
      * Imposta il path al file che include la definizione HTML dei tab (parte dello header)
@@ -153,6 +158,10 @@ class ViewDescriptor {
      */
     public function setMenuFile($menuFile) {
         $this->menu_file = $menuFile;
+    }
+    
+    public function setMiniMenuFile($minimenuFile) {
+        $this->mini_menu_file = $minimenuFile;
     }
 
     /**

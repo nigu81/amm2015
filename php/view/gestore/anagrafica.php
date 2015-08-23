@@ -1,5 +1,5 @@
 <div class="input-form">
-    <h2 class="icon-title" id="h-personali">Dati personali</h2>
+    <h2 class="icon-title" id="h-personali-gestore">Dati personali</h2>
     <ul class="none">
         <li><strong>Nome:</strong> <?= $user->getNome() ?></li>
         <li><strong>Cognome:</strong> <?= $user->getCognome() ?></li>
@@ -11,13 +11,13 @@
 
     <form method="post" action="gestore/anagrafica<?= '?'.$vd->scriviToken()?>">
         <input type="hidden" name="cmd" value="ufficio"/>
-        <label for="pizzeria">Pizzeria</label>
+        <!--<label for="pizzeria">Pizzeria</label>
         <select name="pizzeria" id="pizzeria">
-            <?php foreach ($pizzerie as $pizzeria) { ?>
+            <?php /*foreach ($pizzerie as $pizzeria) { ?>
                 <option value="<?= $pizzeria->getId() ?>" 
                 <?= $user->getPizzeria()->equals($pizzeria) ? 'selected' : '' ?>><?= $pizzeria->getNome() ?></option>
-            <?php } ?>
-        </select>
+            <?php } */?>
+        </select>-->
         <label for="via">Via o Piazza:</label>
         <input type="text" name="via" id="via" value="<?= $user->getVia() ?>"/>
         <br>

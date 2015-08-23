@@ -1,4 +1,4 @@
-<h2 class="icon-title" id="h-esami">Ordini trovati</h2>
+<h2 class="icon-title" id="h-ordini-cerca">Ordini trovati</h2>
 
 <?php 
            

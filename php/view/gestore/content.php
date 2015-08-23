@@ -38,12 +38,12 @@ switch ($vd->getSottoPagina()) {
             Scegli una fra le seguenti sezioni:
         </p>
         <ul class="panel">
-            <li><a href="gestore/anagrafica<?= $vd->scriviToken('?')?>" id="pnl-anagrafica">
+            <li><a href="gestore/anagrafica<?= $vd->scriviToken('?')?>" id="pnl-anagrafica-gestore">
                     Anagrafica
                 </a>
             </li>
-            <li><a href="gestore/ordini_pizzeria<?= $vd->scriviToken('?')?>" id="pnl-cerca">Elenco Ordini</a></li>
-            <li><a href="gestore/lavora_ordine<?= $vd->scriviToken('?')?>" id="pnl-libretto">Lavora Ordine</a></li>
+            <li><a href="gestore/ordini_pizzeria<?= $vd->scriviToken('?')?>" id="pnl-ordini">Elenco Ordini</a></li>
+            <li><a href="gestore/lavora_ordine<?= $vd->scriviToken('?')?>" id="pnl-pizza-boxes">Lavora Ordine</a></li>
             
         </ul>
         <?php

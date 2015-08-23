@@ -28,7 +28,7 @@
                         
 ?>
 
-<h2 class="icon-title" id="h-esami">Dettaglio Ordine <?=$ordini->getId()?><?php echo " ".$string_ordine?></h2>
+<h2 class="icon-title" id="h-pizza-box-mini">Dettaglio Ordine <?=$ordini->getId()?><?php echo " ".$string_ordine?></h2>
 <?php if (count($dettagli_ordine) > 0) { ?>
     <form method="post" action="gestore/lavora_ordine">
     <input type="hidden" name="ordine_id" value=<?=$ordini->getId()?>>

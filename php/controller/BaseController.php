@@ -88,30 +88,19 @@ class BaseController {
     protected function showLoginPage($vd) {
         // mostro la pagina di login
 
-        $vd->setTitolo("esAMMi - login");
+        $vd->setTitolo("gnAMM - login");
         $vd->setMenuFile(basename(__DIR__) . '/../view/login/menu.php');
+         $vd->setMiniMenuFile(basename(__DIR__) . '/../view/login/minimenu.php');
+        
         $vd->setLogoFile(basename(__DIR__) . '/../view/login/logo.php');
         $vd->setLeftBarFile(basename(__DIR__) . '/../view/login/leftBar.php');
         $vd->setRightBarFile(basename(__DIR__) . '/../view/login/rightBar.php');
         $vd->setContentFile(basename(__DIR__) . '/../view/login/content.php');
     }
 
-    /**
-     * Imposta la vista master.php per visualizzare la pagina di gestione
-     * dello studente
-     * @param ViewDescriptor $vd il descrittore della vista
-     */
+    
 
-    protected function showHomeStudente($vd) {
-        // mostro la home degli studenti
-
-        $vd->setTitolo("esAMMi - gestione studente ");
-        $vd->setMenuFile(basename(__DIR__) . '/../view/studente/menu.php');
-        $vd->setLogoFile(basename(__DIR__) . '/../view/studente/logo.php');
-        $vd->setLeftBarFile(basename(__DIR__) . '/../view/studente/leftBar.php');
-        $vd->setRightBarFile(basename(__DIR__) . '/../view/studente/rightBar.php');
-        $vd->setContentFile(basename(__DIR__) . '/../view/studente/content.php');
-    }
+    
     
     /**
      * Imposta la vista master.php per visualizzare la pagina di gestione
@@ -121,28 +110,16 @@ class BaseController {
     protected function showHomeCliente($vd) {
         // mostro la home dei clienti
 
-        $vd->setTitolo("esAMMi - gestione cliente ");
+        $vd->setTitolo("gnAMM - gestione cliente ");
         $vd->setMenuFile(basename(__DIR__) . '/../view/cliente/menu.php');
+        $vd->setMiniMenuFile(basename(__DIR__) . '/../view/cliente/minimenu.php');
         $vd->setLogoFile(basename(__DIR__) . '/../view/cliente/logo.php');
         $vd->setLeftBarFile(basename(__DIR__) . '/../view/cliente/leftBar.php');
         $vd->setRightBarFile(basename(__DIR__) . '/../view/cliente/rightBar.php');
         $vd->setContentFile(basename(__DIR__) . '/../view/cliente/content.php');
     }
 
-    /**
-     * Imposta la vista master.php per visualizzare la pagina di gestione
-     * del docente
-     * @param ViewDescriptor $vd il descrittore della vista
-     */
-    protected function showHomeDocente($vd) {
-        // mostro la home dei docenti
-        $vd->setTitolo("esAMMi - gestione docente ");
-        $vd->setMenuFile(basename(__DIR__) . '/../view/docente/menu.php');
-        $vd->setLogoFile(basename(__DIR__) . '/../view/docente/logo.php');
-        $vd->setLeftBarFile(basename(__DIR__) . '/../view/docente/leftBar.php');
-        $vd->setRightBarFile(basename(__DIR__) . '/../view/docente/rightBar.php');
-        $vd->setContentFile(basename(__DIR__) . '/../view/docente/content.php');
-    }
+   
     
     /**
      * Imposta la vista master.php per visualizzare la pagina di gestione
@@ -151,8 +128,9 @@ class BaseController {
      */
     protected function showHomeGestore($vd) {
         // mostro la home dei docenti
-        $vd->setTitolo("esAMMi - gestione gestore ");
+        $vd->setTitolo("gnAMM - gestione gestore ");
         $vd->setMenuFile(basename(__DIR__) . '/../view/gestore/menu.php');
+        $vd->setMiniMenuFile(basename(__DIR__) . '/../view/gestore/minimenu.php');
         $vd->setLogoFile(basename(__DIR__) . '/../view/gestore/logo.php');
         $vd->setLeftBarFile(basename(__DIR__) . '/../view/gestore/leftBar.php');
         $vd->setRightBarFile(basename(__DIR__) . '/../view/gestore/rightBar.php');
@@ -160,22 +138,7 @@ class BaseController {
         
     }
 
-    /**
-     * Imposta la vista master.php per visualizzare la pagina di gestione
-     * dell'amministratore
-     * @param ViewDescriptor $vd il descrittore della vista
-     */
-    protected function showHomeAmministratore($vd) {
-        // mostro la home degli amministratori
-
-        $vd->setTitolo("esAMMi - Super User ");
-        $vd->setMenuFile(basename(__DIR__) . '/../view/amministratore/menu.php');
-        $vd->setLogoFile(basename(__DIR__) . '/../view/amministratore/logo.php');
-        $vd->setLeftBarFile(basename(__DIR__) . '/../view/amministratore/leftBar.php');
-        $vd->setRightBarFile(basename(__DIR__) . '/../view/amministratore/rightBar.php');
-        $vd->setContentFile(basename(__DIR__) . '/../view/amministratore/content.php');
-    }
-
+   
     /**
      * Seleziona quale pagina mostrare in base al ruolo dell'utente corrente
      * @param ViewDescriptor $vd il descrittore della vista
@@ -184,23 +147,17 @@ class BaseController {
         $user = UserFactory::instance()->cercaUtentePerId($_SESSION[self::user], $_SESSION[self::role]);
         switch ($user->getRuolo()) {
 
-            case User::Studente:
-                $this->showHomeStudente($vd);
-                break;
+            
             case User::Cliente:
                 $this->showHomeCliente($vd);
                 break;
 
-            case User::Docente:
-                $this->showHomeDocente($vd);
-                break;
+           
             case User::Gestore:
                 $this->showHomeGestore($vd);
                 break;
 
-            case User::Amministratore:
-                $this->showHomeAmministratore($vd);
-                break;
+            
         }
     }
 
