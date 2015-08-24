@@ -1,4 +1,4 @@
-<h2 class="icon-title" id="h-esami">Dettagli Ordine <?= $request['ordine'] ?></h2>
+<h2 class="icon-title" id="h-ordini">Dettagli Ordine <?= $request['ordine'] ?></h2>
 
 
 <?php if (count($dettagli_ordine) > 0) { ?>
