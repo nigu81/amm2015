@@ -27,7 +27,7 @@ class Settings {
                 case 'localhost':
                     // configurazione locale
 
-                    self::$appPath = 'http://' . $_SERVER['HTTP_HOST'] . '/progettoamm/';
+                    self::$appPath = 'http://' . $_SERVER['HTTP_HOST'] . '/amm2015/frongiaNicola/';
 
                     break;
                 case 'spano.sc.unica.it':
