@@ -310,6 +310,8 @@ public function cercaOrdinePerId($ordine_id,$pizzeria){
     
     public function eliminaOrdine(&$request){
         $mysqli = Db::getInstance()->connectDb();
+        $mysqli->autocommit(false);
+       
         if (!isset($mysqli)) {
             error_log("[salva] impossibile inizializzare il database");
             return 0;
@@ -323,6 +325,9 @@ public function cercaOrdinePerId($ordine_id,$pizzeria){
                   where ordine_id = $id_ordine";
                   
         $mysqli->query($query);
+        $mysqli->commit();
+        $mysqli->autocommit(true);
+        
         $mysqli->close();
         
     }
