@@ -267,7 +267,7 @@ private function getDettaglioOrdine(&$request, &$msg) {
                 $data = DateTime::createFromFormat("d/m/Y", $request['data']);
                 $mod_ordine->setData($data);
                 
-            } catch {
+            } catch (Exception $e) {
                 $msg[] = "<li>La data specificata non &egrave; corretta</li>";
                 
             }
