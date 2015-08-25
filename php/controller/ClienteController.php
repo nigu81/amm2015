@@ -263,17 +263,10 @@ private function getDettaglioOrdine(&$request, &$msg) {
        
         if (isset($request['data'])) {
             
-            try{
-                $data = DateTime::createFromFormat("d/m/Y", $request['data']);
-                $mod_ordine->setData($data);
-                
-            } catch (Exception $e) {
-                $msg[] = "<li>La data specificata non &egrave; corretta</li>";
-                
-            }
             
             
-            /*$data = DateTime::createFromFormat("d/m/Y", $request['data']);
+            
+            $data = DateTime::createFromFormat("d/m/Y", $request['data']);
             
             if( DateTime::getLastErrors()['warning_count'] > 0 || DateTime::getLastErrors()['error_count'] > 0){
               $msg[] = "<li>La data specificata non &egrave; corretta</li>";
@@ -287,7 +280,7 @@ private function getDettaglioOrdine(&$request, &$msg) {
             } else {
                 $msg[] = "<li>Non hai specificato la data</li>";
                
-            */   
+              
               // $vd->setSottoPagina('crea_ordine'); 
             
         }
